@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 Ask a Question
+    url: https://github.com/Apolloccrypt/nl-data-optout/discussions
+    about: Have a question? Start a discussion instead of opening an issue.
+  - name: 📚 Read the Docs
+    url: https://github.com/Apolloccrypt/nl-data-optout/blob/main/README.md
+    about: Check the README for usage instructions and FAQ.
+  - name: 🔗 LinkedIn Contact
+    url: https://linkedin.com/in/mick-beer
+    about: For complex questions or media inquiries, contact Mick Beer directly.

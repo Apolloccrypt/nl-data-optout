@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NL Data Brokers Opt-Out Tool – GDPR Art. 21 & 17</title>
+  <meta name="description" content="Genereer gratis GDPR-verzoeken (Art. 21 bezwaar + Art. 17 wissen) naar 50+ Nederlandse data brokers, ad-tech, telecom, retail en media bedrijven." />
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 0 auto; padding: 1.5rem; line-height: 1.6; color: #333; background: #f9f9f9; }
+    h1, h2, h3 { color: #d32f2f; }
+    .disclaimer { background: #fff3cd; border-left: 5px solid #ffc107; padding: 1.2rem; margin: 1.5rem 0; color: #856404; }
+    .warning { background: #ffebee; border-left: 5px solid #f44336; padding: 1rem; margin: 1rem 0; color: #c62828; }
+    .info { background: #e3f2fd; border-left: 5px solid #2196f3; padding: 1rem; margin: 1rem 0; color: #1565c0; }
+    form { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    label { display: block; margin: 1rem 0 0.4rem; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    button { background: #d32f2f; color: white; border: none; padding: 0.9rem 1.5rem; font-size: 1.1rem; border-radius: 6px; cursor: pointer; margin-top: 1rem; }
+    button:hover { background: #b71c1c; }
+    button.secondary { background: #757575; margin-left: 0.5rem; }
+    button.secondary:hover { background: #616161; }
+    #result { margin-top: 2rem; padding: 1rem; background: #e8f5e9; border-left: 5px solid #4caf50; white-space: pre-wrap; }
+    footer { margin-top: 3rem; text-align: center; font-size: 0.9rem; color: #666; border-top: 1px solid #ddd; padding-top: 2rem; }
+    select optgroup { font-weight: bold; color: #333; }
+    .broker-count { background: #e3f2fd; padding: 0.8rem 1rem; border-radius: 6px; margin: 1.5rem 0; text-align: center; font-weight: bold; }
+    .update-banner { background: #fff3cd; border: 2px solid #ffc107; padding: 1rem; border-radius: 6px; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+
+  <!-- DISCLAIMER - JURIDISCHE BESCHERMING -->
+  <div class="disclaimer">
+    <h3>⚠️ Belangrijke Disclaimer</h3>
+    <p><strong>Dit is GEEN juridisch advies.</strong> Deze tool helpt bij het uitoefenen van GDPR-rechten (Art. 21, 17, 15). Raadpleeg een privacy-advocaat of autoriteitpersoonsgegevens.nl bij twijfel. Maker niet aansprakelijk. Eigen verantwoordelijkheid. <a href="#disclaimer-full" style="color:#856404;">Volledige disclaimer onderaan</a>.</p>
+  </div>
+
+  <h1>🛡️ NL Data Brokers Opt-Out Tool</h1>
+  <p>Genereer snel GDPR Art. 21 (bezwaar), Art. 17 (wissen) of Art. 15 (inzage) mails naar Nederlandse data brokers, ad-tech, telecom, retail en media bedrijven. Alles lokaal in je browser – geen data-opslag.</p>
+
+  <div class="broker-count" id="brokerCount">
+    📊 50+ Nederlandse data brokers beschikbaar
+  </div>
+
+  <!-- UPDATE NOTICE BANNER -->
+  <div class="update-banner" id="updateBanner" style="display:none;">
+    <strong>⚠️ Let Op:</strong> <span id="updateText"></span>
+  </div>
+
+  <form id="optoutForm">
+    <label for="naam">Je volledige naam *</label>
+    <input type="text" id="naam" required placeholder="Jan Jansen">
+
+    <label for="email">Je emailadres *</label>
+    <input type="email" id="email" required placeholder="jan@voorbeeld.nl">
+
+    <label for="bedrijf">Kies een data broker / bedrijf</label>
+    <select id="bedrijf" required>
+      <option value="">-- Selecteer een bedrijf --</option>
+    </select>
+
+    <label for="type">Type verzoek</label>
+    <select id="type">
+      <option value="bezwaar">Bezwaar tegen verwerking (Art. 21)</option>
+      <option value="wissen">Wissen van gegevens (Art. 17)</option>
+      <option value="inzage">Inzage in mijn gegevens (Art. 15)</option>
+      <option value="beide">Beide (Art. 21 + 17)</option>
+    </select>
+
+    <button type="button" onclick="genereerMail()">Genereer bezwaarmail</button>
+  </form>
+
+  <div id="result"></div>
+
+  <!-- VOLLEDIGE DISCLAIMER -->
+  <section id="disclaimer-full" class="disclaimer" style="margin-top:3rem;">
+    <h2>📋 Volledige Disclaimer</h2>
+    <ol>
+      <li><strong>Geen juridisch advies</strong> – Tool door burger/security expert, geen advocaat.</li>
+      <li><strong>Geen garanties</strong> – Bedrijven reageren niet altijd; bij weigering → klacht bij AP.</li>
+      <li><strong>Persoonlijke verantwoordelijkheid</strong> – Jij beslist gebruik en inhoud.</li>
+      <li><strong>Privacy</strong> – 100% lokaal, geen data-opslag of server-calls.</li>
+      <li><strong>Legaal gebruik</strong> – Alleen eigen legitieme GDPR-verzoeken.</li>
+      <li><strong>Updates</strong> – Bedrijven veranderen contact methoden; meld bugs via <a href="https://github.com/Apolloccrypt/nl-data-optout/issues">GitHub Issues</a>.</li>
+    </ol>
+    <p><strong>Door te genereren accepteer je deze voorwaarden.</strong></p>
+    
+    <h3 style="margin-top: 2rem;">🐛 Bug Melden?</h3>
+    <p>Als een contact email niet meer werkt of je vindt fouten, <a href="https://github.com/Apolloccrypt/nl-data-optout/issues/new">open een GitHub Issue</a> of tag @mickbeer op LinkedIn.</p>
+    
+    <h3 style="margin-top: 2rem;">📚 Meer Info</h3>
+    <p>
+      • <a href="https://medium.com/p/75744f8645c6">Volledig onderzoek (Medium)</a><br>
+      • <a href="https://autoriteitpersoonsgegevens.nl">Autoriteit Persoonsgegevens</a><br>
+      • <a href="https://github.com/Apolloccrypt/nl-data-optout">GitHub Repository</a>
+    </p>
+  </section>
+
+  <footer>
+    <p>Made voor privacy door <a href="https://linkedin.com/in/mick-beer">Mick Beer</a></p>
+    <p><a href="https://github.com/Apolloccrypt/nl-data-optout">Broncode op GitHub</a> • Open Source • <a href="https://github.com/Apolloccrypt/nl-data-optout/blob/main/LICENSE">MIT License</a></p>
+    <p style="font-size: 0.8rem; color: #999; margin-top: 1rem;">v1.1.0 • Laatste update: 21 maart 2026 • <a href="https://github.com/Apolloccrypt/nl-data-optout/blob/main/CHANGELOG.md" style="color:#999;">Changelog</a></p>
+  </footer>
+
+  <script>
+    // Uitgebreide lijst met 50+ NL-relevante data brokers
+    const brokers = [
+      // === CREDIT BUREAUS & DATA ENRICHMENT ===
+      { name: "Experian Nederland", email: "privacy@experian.nl", category: "Credit Bureaus", note: "AP boete €2.7M (2025) voor onvoldoende vendor disclosure" },
+      { name: "Graydon", email: "privacy@graydon.nl", category: "Credit Bureaus" },
+      { name: "Creditsafe", email: "privacy@creditsafe.com", category: "Credit Bureaus" },
+      { name: "Focum BV", email: "privacy@focum.nl", category: "Credit Bureaus" },
+      { name: "Dun & Bradstreet", email: "privacy@dnb.com", category: "Credit Bureaus" },
+      { name: "Bisnode (Dun & Bradstreet)", email: "privacy@bisnode.nl", category: "Credit Bureaus" },
+
+      // === AD-TECH & TRACKING ===
+      { name: "Google (Ads/Analytics)", email: "privacy@google.com", category: "Ad-Tech & Tracking", note: "Aanwezig op 100% van geteste NL nieuwssites" },
+      { name: "Criteo", email: "privacy@criteo.com", category: "Ad-Tech & Tracking", note: "Aanwezig op 80% van geteste NL nieuwssites" },
+      { name: "Index Exchange", email: "privacy@indexexchange.com", category: "Ad-Tech & Tracking", note: "Aanwezig op 80% van geteste NL nieuwssites" },
+      { name: "Xandr (Microsoft)", email: "privacy@xandr.com", category: "Ad-Tech & Tracking" },
+      { 
+        name: "Meta (Facebook/Instagram) ⚠️", 
+        email: "FORM_REQUIRED",
+        formUrl: "https://www.facebook.com/help/contact/540977946302970",
+        category: "Ad-Tech & Tracking", 
+        note: "Email werkt niet meer sinds maart 2026. Verplicht formulier (dark pattern).",
+        isForm: true
+      },
+      { name: "Outbrain", email: "privacy@outbrain.com", category: "Ad-Tech & Tracking" },
+      { name: "Taboola", email: "privacy@taboola.com", category: "Ad-Tech & Tracking" },
+      { name: "Magnite (Rubicon)", email: "privacy@magnite.com", category: "Ad-Tech & Tracking" },
+      { name: "PubMatic", email: "privacy@pubmatic.com", category: "Ad-Tech & Tracking" },
+      { name: "OpenX", email: "privacy@openx.com", category: "Ad-Tech & Tracking" },
+      { name: "LinkedIn Marketing", email: "privacy@linkedin.com", category: "Ad-Tech & Tracking" },
+      { name: "TikTok", email: "privacy@tiktok.com", category: "Ad-Tech & Tracking" },
+      { name: "Snap Inc. (Snapchat)", email: "privacy@snap.com", category: "Ad-Tech & Tracking" },
+      { name: "Twitter / X Corp", email: "privacy@twitter.com", category: "Ad-Tech & Tracking" },
+      { name: "Pinterest", email: "privacy@pinterest.com", category: "Ad-Tech & Tracking" },
+      { name: "Amazon Ads", email: "privacy@amazon.com", category: "Ad-Tech & Tracking" },
+      { name: "AppNexus (Xandr)", email: "privacy@xandr.com", category: "Ad-Tech & Tracking" },
+      { name: "AdForm", email: "privacy@adform.com", category: "Ad-Tech & Tracking" },
+      { name: "Sizmek (Amazon)", email: "privacy@sizmek.com", category: "Ad-Tech & Tracking" },
+      { name: "The Trade Desk", email: "privacy@thetradedesk.com", category: "Ad-Tech & Tracking" },
+      { name: "MediaMath", email: "privacy@mediamath.com", category: "Ad-Tech & Tracking" },
+
+      // === MEDIA & PUBLISHERS ===
+      { name: "DPG Media (NU.nl, AD.nl, Qmusic)", email: "privacy@dpgmedia.nl", category: "Media & Publishers", note: "104 van 121 partners niet genoemd in cookie banner" },
+      { name: "RTL Nederland", email: "privacy@rtl.nl", category: "Media & Publishers" },
+      { name: "Sanoma Media", email: "privacy@sanoma.com", category: "Media & Publishers" },
+      { name: "NPO / NOS", email: "privacy@npo.nl", category: "Media & Publishers", note: "Pre-consent tracking gedetecteerd (cookies vóór banner)" },
+      { name: "Mediahuis (Telegraaf, NHD)", email: "privacy@mediahuis.nl", category: "Media & Publishers" },
+      { name: "Talpa Network", email: "privacy@talpanetwork.com", category: "Media & Publishers" },
+
+      // === TELECOM ===
+      { name: "KPN", email: "privacy@kpn.com", category: "Telecom" },
+      { name: "VodafoneZiggo", email: "privacy@vodafoneziggo.nl", category: "Telecom" },
+      { name: "T-Mobile / Odido", email: "privacy@t-mobile.nl", category: "Telecom", note: "Data lek januari 2026 (mogelijk betrokken)" },
+      { name: "Tele2", email: "privacy@tele2.nl", category: "Telecom" },
+      { name: "Youfone", email: "privacy@youfone.nl", category: "Telecom" },
+      { name: "Simyo", email: "privacy@simyo.nl", category: "Telecom" },
+      { name: "Lebara", email: "privacy@lebara.nl", category: "Telecom" },
+
+      // === RETAIL & E-COMMERCE ===
+      { name: "Kruidvat Loyalty", email: "privacy@kruidvat.nl", category: "Retail & E-Commerce", note: "AP boete €600k voor cookie wall" },
+      { name: "Albert Heijn Bonus", email: "privacy@ah.nl", category: "Retail & E-Commerce" },
+      { name: "Bol.com", email: "privacy@bol.com", category: "Retail & E-Commerce", note: "Best practice: 100% vendor disclosure (13/13)" },
+      { name: "Coolblue", email: "privacy@coolblue.nl", category: "Retail & E-Commerce", note: "AP boete €40k voor pre-consent tracking" },
+      { name: "Wehkamp", email: "privacy@wehkamp.nl", category: "Retail & E-Commerce" },
+      { name: "Zalando", email: "privacy@zalando.nl", category: "Retail & E-Commerce" },
+      { name: "HEMA", email: "privacy@hema.nl", category: "Retail & E-Commerce" },
+      { name: "Action", email: "privacy@action.com", category: "Retail & E-Commerce" },
+      { name: "MediaMarkt", email: "privacy@mediamarkt.nl", category: "Retail & E-Commerce" },
+      { name: "Jumbo Supermarkten", email: "privacy@jumbo.com", category: "Retail & E-Commerce" },
+
+      // === ANALYTICS & DATA PLATFORMS ===
+      { name: "Smartocto (Content Insights)", email: "privacy@smartocto.com", category: "Analytics", note: "Gebruikt door NOS.nl (niet in cookie banner)" },
+      { name: "Content Insights", email: "privacy@contentinsights.com", category: "Analytics" },
+      { name: "Piano Analytics", email: "privacy@piano.io", category: "Analytics" },
+      { name: "Comscore", email: "privacy@comscore.com", category: "Analytics" },
+      { name: "Nielsen", email: "privacy@nielsen.com", category: "Analytics" },
+      { name: "Chartbeat", email: "privacy@chartbeat.com", category: "Analytics" },
+
+      // === MARKETING CLOUDS ===
+      { name: "Salesforce Marketing Cloud", email: "privacy@salesforce.com", category: "Marketing" },
+      { name: "Adobe Marketing Cloud", email: "privacy@adobe.com", category: "Marketing" },
+      { name: "Oracle Marketing Cloud", email: "privacy@oracle.com", category: "Marketing" },
+      { name: "HubSpot", email: "privacy@hubspot.com", category: "Marketing" },
+      { name: "Mailchimp", email: "privacy@mailchimp.com", category: "Marketing" },
+    ];
+
+    // Vul de <select> dynamisch met optgroups voor categorieën
+    const bedrijfSelect = document.getElementById('bedrijf');
+    const categories = {};
+    
+    brokers.forEach(broker => {
+      if (!categories[broker.category]) {
+        categories[broker.category] = [];
+      }
+      categories[broker.category].push(broker);
+    });
+
+    Object.keys(categories).sort().forEach(cat => {
+      const optgroup = document.createElement('optgroup');
+      optgroup.label = `${cat} (${categories[cat].length})`;
+      categories[cat].forEach(broker => {
+        const opt = document.createElement('option');
+        opt.value = broker.name;
+        const hasNote = broker.note ? ' ℹ️' : '';
+        const isForm = broker.isForm ? ' ⚠️' : '';
+        opt.textContent = `${broker.name}${hasNote}${isForm}`;
+        optgroup.appendChild(opt);
+      });
+      bedrijfSelect.appendChild(optgroup);
+    });
+
+    // Andere optie
+    const otherOpt = document.createElement('option');
+    otherOpt.value = 'Andere';
+    otherOpt.textContent = 'Ander bedrijf (handmatig invoeren)';
+    bedrijfSelect.appendChild(otherOpt);
+
+    // Extra input voor 'Andere'
+    const extraLabel = document.createElement('label');
+    extraLabel.htmlFor = 'extraBedrijf';
+    extraLabel.textContent = 'Ander bedrijf (naam + eventueel email privacy@...)';
+    extraLabel.style.display = 'none';
+    const extraInput = document.createElement('input');
+    extraInput.type = 'text';
+    extraInput.id = 'extraBedrijf';
+    extraInput.placeholder = 'Bijv. Bedrijfsnaam – privacy@bedrijf.nl';
+    extraInput.style.display = 'none';
+    bedrijfSelect.parentNode.insertBefore(extraLabel, bedrijfSelect.nextSibling.nextSibling);
+    bedrijfSelect.parentNode.insertBefore(extraInput, extraLabel.nextSibling);
+
+    bedrijfSelect.addEventListener('change', () => {
+      const show = bedrijfSelect.value === 'Andere';
+      extraLabel.style.display = show ? 'block' : 'none';
+      extraInput.style.display = show ? 'block' : 'none';
+      
+      // Show note/warning banner if broker has special instructions
+      const selected = brokers.find(b => b.name === bedrijfSelect.value);
+      const banner = document.getElementById('updateBanner');
+      const text = document.getElementById('updateText');
+      
+      if (selected && (selected.note || selected.isForm)) {
+        let message = selected.note || '';
+        if (selected.isForm) {
+          message = `${selected.name} vereist een FORMULIER (geen email). ${message}`;
+        }
+        text.textContent = message;
+        banner.style.display = 'block';
+      } else {
+        banner.style.display = 'none';
+      }
+    });
+
+    function genereerMail() {
+      const naam = document.getElementById('naam').value.trim();
+      const email = document.getElementById('email').value.trim();
+      let bedrijf = bedrijfSelect.value;
+      const extra = extraInput.value.trim();
+      const type = document.getElementById('type').value;
+
+      if (!naam || !email || !bedrijf) {
+        alert('Vul aub naam, email en een bedrijf in!');
+        return;
+      }
+
+      let ontvanger = '';
+      let bedrijfNaam = bedrijf;
+      let isForm = false;
+      let formUrl = '';
+
+      if (bedrijf === 'Andere') {
+        if (!extra) {
+          alert('Vul aub naam (en liefst email) van het bedrijf in!');
+          return;
+        }
+        const parts = extra.split('–').map(p => p.trim());
+        bedrijfNaam = parts[0];
+        ontvanger = parts[1] || `privacy@${bedrijfNaam.toLowerCase().replace(/[^a-z0-9]/g,'')}.nl`;
+      } else {
+        const selected = brokers.find(b => b.name === bedrijf);
+        if (selected) {
+          if (selected.isForm) {
+            isForm = true;
+            formUrl = selected.formUrl;
+            ontvanger = formUrl;
+          } else {
+            ontvanger = selected.email;
+          }
+        } else {
+          ontvanger = `privacy@${bedrijf.toLowerCase().replace(/[^a-z0-9]/g,'')}.nl`;
+        }
+      }
+
+      const onderwerpMap = {
+        bezwaar: 'Bezwaar tegen verwerking persoonsgegevens (GDPR Art. 21)',
+        wissen: 'Verzoek tot wissen persoonsgegevens (GDPR Art. 17)',
+        inzage: 'Verzoek tot inzage persoonsgegevens (GDPR Art. 15)',
+        beide: 'Bezwaar + wissen persoonsgegevens (GDPR Art. 21 & 17)'
+      };
+      const onderwerp = onderwerpMap[type];
+
+      const body = `Geachte heer/mevrouw,
+
+Mijn naam is ${naam} en mijn email is ${email}.
+
+Ik oefen hierbij formeel mijn rechten uit onder de AVG/GDPR:
+
+${
+  (type === 'bezwaar' || type === 'beide') 
+    ? `- Bezwaar tegen verwerking van mijn persoonsgegevens voor marketing, profiling, tracking e.d. (Art. 21 GDPR). Ik wil geen verdere verwerking door ${bedrijfNaam}.\n` 
+    : ''
+}${
+  (type === 'wissen' || type === 'beide') 
+    ? `- Verzoek tot wissen van al mijn persoonsgegevens (Art. 17 GDPR, recht om vergeten te worden).\n` 
+    : ''
+}${
+  type === 'inzage' 
+    ? `- Verzoek tot inzage in alle persoonsgegevens die u van mij verwerkt (Art. 15 GDPR), inclusief een kopie.\n` 
+    : ''
+}
+
+Graag ontvang ik binnen 1 maand bevestiging en bewijs van actie. Bij weigering: gemotiveerde uitleg.
+
+Met vriendelijke groet,
+${naam}`;
+
+      // Handle form-based brokers differently
+      if (isForm) {
+        // Copy to clipboard
+        navigator.clipboard.writeText(body).then(() => {
+          document.getElementById('result').innerHTML = `
+            <h3>⚠️ Let op: Dit bedrijf vereist een formulier</h3>
+            <div class="warning">
+              <p><strong>${bedrijfNaam}</strong> accepteert geen email meer voor GDPR-verzoeken.</p>
+              <p>Je moet hun contact formulier gebruiken. De tekst is gekopieerd naar je clipboard.</p>
+            </div>
+            
+            <h4>📋 Template (gekopieerd):</h4>
+            <pre style="background:#f5f5f5; padding:1rem; border-radius:6px; overflow:auto; max-height:300px; border: 1px solid #ddd;">${body}</pre>
+            
+            <button onclick="window.open('${formUrl}', '_blank')">🔗 Open Contact Formulier</button>
+            
+            <div class="info" style="margin-top: 1rem;">
+              <strong>ℹ️ Dark Pattern Alert:</strong> Dit is een voorbeeld van een "dark pattern" - bedrijven maken GDPR-verzoeken moeilijker door email te vervangen met formulieren. 
+              Dit verhoogt friction en vermindert het aantal opt-outs. Overweeg dit te melden bij de 
+              <a href="https://autoriteitpersoonsgegevens.nl/nl/zelf-doen/privacyrechten/melden">Autoriteit Persoonsgegevens</a>.
+            </div>
+          `;
+        }).catch(err => {
+          alert('Kon tekst niet kopiëren naar clipboard. Kopieer handmatig uit onderstaand vak.');
+          document.getElementById('result').innerHTML = `
+            <h3>⚠️ Formulier vereist</h3>
+            <p>Kopieer onderstaande tekst en plak in het formulier:</p>
+            <pre style="background:#f5f5f5; padding:1rem; border-radius:6px; overflow:auto; max-height:300px;">${body}</pre>
+            <button onclick="window.open('${formUrl}', '_blank')">Open Contact Formulier</button>
+          `;
+        });
+      } else {
+        // Normal email flow
+        const mailto = `mailto:${ontvanger}?subject=${encodeURIComponent(onderwerp)}&body=${encodeURIComponent(body)}`;
+
+        document.getElementById('result').innerHTML = `
+          <h3>✅ Klaar! Open de mail:</h3>
+          <p><strong>Naar:</strong> ${ontvanger}</p>
+          <p><strong>Onderwerp:</strong> ${onderwerp}</p>
+          
+          <h4>📋 Template:</h4>
+          <pre style="background:#f5f5f5; padding:1rem; border-radius:6px; overflow:auto; max-height:300px; border: 1px solid #ddd;">${body}</pre>
+          
+          <button onclick="window.location='${mailto}'">📧 Open in mailprogramma</button>
+          <button class="secondary" onclick="navigator.clipboard.writeText(\`${body.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`).then(() => alert('✅ Tekst gekopieerd naar clipboard!'))">📋 Kopieer Tekst</button>
+          
+          <p style="margin-top:1rem; font-size:0.9rem; color:#666;">
+            💡 <strong>Tip:</strong> Werkt "mailto:" niet? Gebruik "Kopieer Tekst" en plak in je mail-app.
+          </p>
+        `;
+      }
+    }
+
+    // Update broker count on load
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('brokerCount').innerHTML = 
+        `📊 <strong>${brokers.length} Nederlandse data brokers</strong> beschikbaar`;
+    });
+  </script>
+</body>
+</html>

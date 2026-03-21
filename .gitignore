@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Testing
+test.html
+debug.html
+
+# Node (if future build tools added)
+node_modules/
+package-lock.json
+
+# Personal notes
+notes.md
+TODO.md
