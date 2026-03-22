@@ -97,7 +97,7 @@
   <footer>
     <p>Made voor privacy door <a href="https://linkedin.com/in/mick-beer">Mick Beer</a></p>
     <p><a href="https://github.com/Apolloccrypt/nl-data-optout">Broncode op GitHub</a> • Open Source • <a href="https://github.com/Apolloccrypt/nl-data-optout/blob/main/LICENSE">MIT License</a></p>
-    <p style="font-size: 0.8rem; color: #999; margin-top: 1rem;">v1.1.0 • Laatste update: 21 maart 2026 • <a href="https://github.com/Apolloccrypt/nl-data-optout/blob/main/CHANGELOG.md" style="color:#999;">Changelog</a></p>
+    <p style="font-size: 0.8rem; color: #999; margin-top: 1rem;">v1.1.1 • Laatste update: 22 maart 2026 • <a href="https://github.com/Apolloccrypt/nl-data-optout/blob/main/CHANGELOG.md" style="color:#999;">Changelog</a></p>
   </footer>
 
   <script>
@@ -115,7 +115,13 @@
       { name: "Google (Ads/Analytics)", email: "privacy@google.com", category: "Ad-Tech & Tracking", note: "Aanwezig op 100% van geteste NL nieuwssites" },
       { name: "Criteo", email: "privacy@criteo.com", category: "Ad-Tech & Tracking", note: "Aanwezig op 80% van geteste NL nieuwssites" },
       { name: "Index Exchange", email: "privacy@indexexchange.com", category: "Ad-Tech & Tracking", note: "Aanwezig op 80% van geteste NL nieuwssites" },
-      { name: "Xandr (Microsoft)", email: "privacy@xandr.com", category: "Ad-Tech & Tracking" },
+      { 
+        name: "Xandr (Microsoft Advertising)", 
+        email: "privacy@microsoft.com",
+        webform: "https://privacy.microsoft.com/",
+        category: "Ad-Tech & Tracking",
+        note: "⚠️ Xandr is Microsoft-owned. Contact via Microsoft privacy portal. 0% GDPR response rate (noyb 2024)."
+      },
       { 
         name: "Meta (Facebook/Instagram) ⚠️", 
         email: "FORM_REQUIRED",
@@ -171,7 +177,13 @@
       { name: "Jumbo Supermarkten", email: "privacy@jumbo.com", category: "Retail & E-Commerce" },
 
       // === ANALYTICS & DATA PLATFORMS ===
-      { name: "Smartocto (Content Insights)", email: "privacy@smartocto.com", category: "Analytics", note: "Gebruikt door NOS.nl (niet in cookie banner)" },
+      { 
+        name: "SmartOcto", 
+        email: "dpo@smartocto.com",
+        alt_email: "info@smartocto.com",
+        category: "Analytics",
+        note: "DPO verified from official privacy policy. NL-based, GDPR compliant."
+      },
       { name: "Content Insights", email: "privacy@contentinsights.com", category: "Analytics" },
       { name: "Piano Analytics", email: "privacy@piano.io", category: "Analytics" },
       { name: "Comscore", email: "privacy@comscore.com", category: "Analytics" },
@@ -183,7 +195,7 @@
       { name: "Adobe Marketing Cloud", email: "privacy@adobe.com", category: "Marketing" },
       { name: "Oracle Marketing Cloud", email: "privacy@oracle.com", category: "Marketing" },
       { name: "HubSpot", email: "privacy@hubspot.com", category: "Marketing" },
-      { name: "Mailchimp", email: "privacy@mailchimp.com", category: "Marketing" },
+      { name: "Mailchimp", email: "privacy@mailchimp.com", category: "Marketing" }
     ];
 
     // Vul de <select> dynamisch met optgroups voor categorieën
