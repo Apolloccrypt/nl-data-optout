@@ -1,9 +1,10 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+Alle noemenswaardige wijzigingen aan dit project worden in dit bestand bijgehouden.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+Het formaat is gebaseerd op [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/),
+dit project hanteert [Semantic Versioning](https://semver.org/lang/nl/),
+en commit-berichten volgen grotendeels de stijl van [Conventional Commits](https://www.conventionalcommits.org/nl/v1.0.0/).
 
 ---
 
@@ -16,8 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Naamgeving consistentie** – alle code-identifiers omgezet naar Engels en consistente conventies: camelCase voor JS-variabelen en -functies, kebab-case voor HTML IDs en CSS-klassen (`genereerMail` → `generateMail`, `bedrijf` → `company`, `ontvanger` → `recipient`, etc.)
 - **Form-waarden** – interne option-values omgezet naar Engels (`bezwaar` → `objection`, `wissen` → `erase`, `inzage` → `access`, `beide` → `both`)
 - **Donatie-knop** – minder opdringerig; verplaatst van prominente gele box naar een subtiele regel in de footer
-- **HTML/JS/CSS gesplitst** – code uitgesplitst in aparte bestanden voor betere onderhoudbaarheid (script.js, style.css)
-- **UI** – flashy kleuren en emoji gereduceerd voor een rustigere leeservaring
+- **HTML/JS/CSS gesplitst** – code uitgesplitst in aparte bestanden voor betere onderhoudbaarheid (script.js, style.css) ([#1](https://github.com/Apolloccrypt/nl-data-optout/issues/1), [#2](https://github.com/Apolloccrypt/nl-data-optout/issues/2))
+- **UI** – flashy kleuren en emoji gereduceerd voor een rustigere leeservaring ([#3](https://github.com/Apolloccrypt/nl-data-optout/issues/3), [#4](https://github.com/Apolloccrypt/nl-data-optout/issues/4))
 
 ### Fixed
 - **Broken Medium URLs** – alle verwijzingen naar `medium.com/p/75744f8645c6` en het lange artikel-pad vervangen door `https://medium.com/@mick.ronan.beer` (index.html, script.js, README.md)
