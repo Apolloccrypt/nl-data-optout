@@ -75,12 +75,15 @@ button.secondary {
 
 button.secondary:hover { background: #616161; }
 
+#result:empty {
+  display: none;
+}
+
 #result {
   margin-top: 2rem;
   padding: 1rem;
   background: #e8f5e9;
   border-left: 5px solid #4caf50;
-  white-space: pre-wrap;
 }
 
 footer {

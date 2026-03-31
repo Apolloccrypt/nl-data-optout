@@ -18,36 +18,36 @@
   <h1>NL Data Brokers Opt-Out Tool</h1>
   <p>Genereer snel GDPR Art. 21 (bezwaar), Art. 17 (wissen) of Art. 15 (inzage) mails naar Nederlandse data brokers, ad-tech, telecom, retail en media bedrijven. Alles lokaal in je browser - geen data-opslag.</p>
 
-  <div class="broker-count" id="brokerCount">
+  <div class="broker-count" id="broker-count">
     50+ Nederlandse data brokers beschikbaar
   </div>
 
   <!-- UPDATE NOTICE BANNER -->
-  <div class="update-banner" id="updateBanner" style="display:none;">
-    <strong>Let op:</strong> <span id="updateText"></span>
+  <div class="update-banner" id="update-banner" style="display:none;">
+    <strong>Let op:</strong> <span id="update-text"></span>
   </div>
 
-  <form id="optoutForm">
-    <label for="naam">Je volledige naam *</label>
-    <input type="text" id="naam" required placeholder="Jan Jansen">
+  <form id="optout-form">
+    <label for="name">Je volledige naam *</label>
+    <input type="text" id="name" required placeholder="Jan Jansen">
 
     <label for="email">Je emailadres *</label>
     <input type="email" id="email" required placeholder="jan@voorbeeld.nl">
 
-    <label for="bedrijf">Kies een data broker / bedrijf</label>
-    <select id="bedrijf" required>
+    <label for="company">Kies een data broker / bedrijf</label>
+    <select id="company" required>
       <option value="">-- Selecteer een bedrijf --</option>
     </select>
 
     <label for="type">Type verzoek</label>
     <select id="type">
-      <option value="bezwaar">Bezwaar tegen verwerking (Art. 21)</option>
-      <option value="wissen">Wissen van gegevens (Art. 17)</option>
-      <option value="inzage">Inzage in mijn gegevens (Art. 15)</option>
-      <option value="beide">Beide (Art. 21 + 17)</option>
+      <option value="objection">Bezwaar tegen verwerking (Art. 21)</option>
+      <option value="erase">Wissen van gegevens (Art. 17)</option>
+      <option value="access">Inzage in mijn gegevens (Art. 15)</option>
+      <option value="both">Beide (Art. 21 + 17)</option>
     </select>
 
-    <button type="button" onclick="genereerMail()">Genereer bezwaarmail</button>
+    <button type="button" onclick="generateMail()">Genereer bezwaarmail</button>
   </form>
 
   <div id="result"></div>
@@ -66,11 +66,11 @@
     <p><strong>Door te genereren accepteer je deze voorwaarden.</strong></p>
 
     <h3 style="margin-top: 2rem;">Bug Melden?</h3>
-    <p>Als een contact email niet meer werkt of je vindt fouten, <a href="https://github.com/Apolloccrypt/nl-data-optout/issues/new">open een GitHub Issue</a> of tag @mickbeer op LinkedIn.</p>
+    <p>Als een contact email niet meer werkt of je vindt fouten, <a href="https://github.com/Apolloccrypt/nl-data-optout/issues/new">open een GitHub Issue</a> of <a href="https://www.linkedin.com/in/mick-beer/">tag @mick-beer op LinkedIn</a>.</p>
 
     <h3 style="margin-top: 2rem;">Meer Info</h3>
     <p>
-      <a href="https://medium.com/p/75744f8645c6">Volledig onderzoek (Medium)</a><br>
+      <a href="https://medium.com/@mick.ronan.beer">Volledig onderzoek (Medium)</a><br>
       <a href="https://autoriteitpersoonsgegevens.nl">Autoriteit Persoonsgegevens</a><br>
       <a href="https://github.com/Apolloccrypt/nl-data-optout">GitHub Repository</a>
     </p>
@@ -87,18 +87,14 @@
       <li>Burgers inzicht geven in hoe hun data werkelijk wordt behandeld</li>
     </ul>
     <p>Alles wat ik publiceer is gebaseerd op reproduceerbaar technisch onderzoek. Geen data wordt bewaard of verspreid. Na analyse wordt alles permanent verwijderd (responsible disclosure).</p>
-    <div style="background:#fff3cd; border-left:4px solid #ffc107; padding:1rem; margin:1.5rem 0; border-radius:4px;">
-      <p style="margin:0; color:#856404;">Omdat dit volledig onafhankelijk gebeurt, heb ik geen budget voor servers, tools of tijd. Daarom stel ik het enorm op prijs als je mijn werk steunt via een donatie:</p>
-      <p style="margin:0.8rem 0 0;"><a href="https://www.buymeacoffee.com/mickbeer" target="_blank" style="display:inline-block; background:#FFDD00; color:#000; font-weight:bold; padding:0.6rem 1.2rem; border-radius:6px; text-decoration:none;">Buy Me a Coffee</a></p>
-      <p style="margin:0.6rem 0 0; font-size:0.9rem; color:#856404;">Elke bijdrage helpt me om dit onderzoek voort te zetten en de Nederlandse privacy-discussie feitelijk en onafhankelijk te houden.</p>
-    </div>
     <p style="margin-bottom:0;">Dank je wel<br><strong>Mick Beer</strong> - Security Architect &amp; onafhankelijk onderzoeker</p>
   </section>
 
   <footer>
-    <p>Made voor privacy door <a href="https://linkedin.com/in/mick-beer">Mick Beer</a></p>
-    <p><a href="https://github.com/Apolloccrypt/nl-data-optout">Broncode op GitHub</a> - Open Source - <a href="https://github.com/Apolloccrypt/nl-data-optout/blob/main/LICENSE">MIT License</a></p>
-    <p style="font-size: 0.8rem; color: #999; margin-top: 1rem;">v1.1.1 - Laatste update: 22 maart 2026 - <a href="https://github.com/Apolloccrypt/nl-data-optout/blob/main/CHANGELOG.md" style="color:#999;">Changelog</a></p>
+    <p>Made voor privacy door <a href="https://www.linkedin.com/in/mick-beer/">Mick Beer</a></p>
+    <p><a href="https://github.com/Apolloccrypt/nl-data-optout">Broncode op GitHub</a> - Open Source - <a href="LICENSE">MIT License</a></p>
+    <p style="font-size: 0.8rem; color: #999; margin-top: 1rem;">v1.2.0 - Laatste update: 31 maart 2026 - <a href="CHANGELOG.md" style="color:#999;">Changelog</a></p>
+    <p style="display:inline-block; background:#fff3cd; color:#856404; border:1px solid #ffc107; border-radius:6px; padding:0.4rem 0.9rem; margin-top:0.75rem; font-size:0.85rem;">Dit project is onafhankelijk en gratis. <a href="https://www.buymeacoffee.com/mickbeer" target="_blank" style="color:#856404; font-weight:bold;">Buy me a coffee</a> als je het nuttig vond.</p>
   </footer>
 
   <script src="script.js"></script>

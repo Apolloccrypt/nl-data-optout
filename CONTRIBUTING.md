@@ -121,7 +121,7 @@ Open a Discussion or Issue to coordinate!
 
 - **GitHub Issues:** Bug reports, feature requests
 - **GitHub Discussions:** General questions, ideas
-- **LinkedIn:** [@mickbeer](https://linkedin.com/in/mick-beer) – DM for complex questions
+- **LinkedIn:** [@mickbeer](https://www.linkedin.com/in/mick-beer/) – DM for complex questions
 
 ---
 
@@ -160,7 +160,7 @@ Looking for where to help? Check these:
 
 ## 📞 Questions?
 
-Not sure how to contribute? Open an Issue or DM [@mickbeer](https://linkedin.com/in/mick-beer) on LinkedIn.
+Not sure how to contribute? Open an Issue or DM [@mickbeer](https://www.linkedin.com/in/mick-beer/) on LinkedIn.
 
 **We're friendly and help new contributors!** 👋
 

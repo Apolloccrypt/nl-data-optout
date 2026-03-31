@@ -8,7 +8,7 @@ const brokers = [
   { name: "Bisnode (Dun & Bradstreet)", email: "privacy@bisnode.nl", category: "Credit Bureaus" },
 
   // === AD-TECH & TRACKING ===
-  { name: "Google (Ads/Analytics)", email: "privacy@google.com", category: "Ad-Tech & Tracking", note: "Aanwezig op 100% van geteste NL nieuwssites" },
+  { name: "Google (Ads/Analytics)", email: "privacy@google.com", category: "Ad-Tech & Tracking", note: "Aanwezig op 100% van geteste NL nieuwssites. Bron: <a href=\"https://medium.com/@mick.ronan.beer\" target=\"_blank\">Onderzoek Volkskrant &amp; Telegraaf (Medium)</a>" },
   { name: "Criteo", email: "privacy@criteo.com", category: "Ad-Tech & Tracking", note: "Aanwezig op 80% van geteste NL nieuwssites" },
   { name: "Index Exchange", email: "privacy@indexexchange.com", category: "Ad-Tech & Tracking", note: "Aanwezig op 80% van geteste NL nieuwssites" },
   {
@@ -98,7 +98,7 @@ const brokers = [
   {
     name: "SmartOcto",
     email: "dpo@smartocto.com",
-    alt_email: "info@smartocto.com",
+    altEmail: "info@smartocto.com",
     category: "Analytics",
     note: "DPO verified from official privacy policy. NL-based, GDPR compliant."
   },
@@ -116,8 +116,8 @@ const brokers = [
   { name: "Mailchimp", email: "privacy@mailchimp.com", category: "Marketing" }
 ];
 
-// Vul de <select> dynamisch met optgroups voor categorieen
-const bedrijfSelect = document.getElementById('bedrijf');
+// Populate the <select> dynamically with optgroups per category
+const companySelect = document.getElementById('company');
 const categories = {};
 
 brokers.forEach(broker => {
@@ -136,113 +136,113 @@ Object.keys(categories).sort().forEach(cat => {
     opt.textContent = broker.name;
     optgroup.appendChild(opt);
   });
-  bedrijfSelect.appendChild(optgroup);
+  companySelect.appendChild(optgroup);
 });
 
-// Andere optie
+// Other option
 const otherOpt = document.createElement('option');
-otherOpt.value = 'Andere';
+otherOpt.value = 'other';
 otherOpt.textContent = 'Ander bedrijf (handmatig invoeren)';
-bedrijfSelect.appendChild(otherOpt);
+companySelect.appendChild(otherOpt);
 
-// Extra input voor 'Andere'
+// Extra input for 'other'
 const extraLabel = document.createElement('label');
-extraLabel.htmlFor = 'extraBedrijf';
+extraLabel.htmlFor = 'extra-company';
 extraLabel.textContent = 'Ander bedrijf (naam + eventueel email privacy@...)';
 extraLabel.style.display = 'none';
 const extraInput = document.createElement('input');
 extraInput.type = 'text';
-extraInput.id = 'extraBedrijf';
+extraInput.id = 'extra-company';
 extraInput.placeholder = 'Bijv. Bedrijfsnaam - privacy@bedrijf.nl';
 extraInput.style.display = 'none';
-bedrijfSelect.parentNode.insertBefore(extraLabel, bedrijfSelect.nextSibling.nextSibling);
-bedrijfSelect.parentNode.insertBefore(extraInput, extraLabel.nextSibling);
+companySelect.parentNode.insertBefore(extraLabel, companySelect.nextSibling.nextSibling);
+companySelect.parentNode.insertBefore(extraInput, extraLabel.nextSibling);
 
-bedrijfSelect.addEventListener('change', () => {
-  const show = bedrijfSelect.value === 'Andere';
+companySelect.addEventListener('change', () => {
+  const show = companySelect.value === 'other';
   extraLabel.style.display = show ? 'block' : 'none';
   extraInput.style.display = show ? 'block' : 'none';
 
-  const selected = brokers.find(b => b.name === bedrijfSelect.value);
-  const banner = document.getElementById('updateBanner');
-  const text = document.getElementById('updateText');
+  const selected = brokers.find(b => b.name === companySelect.value);
+  const banner = document.getElementById('update-banner');
+  const text = document.getElementById('update-text');
 
   if (selected && (selected.note || selected.isForm)) {
     let message = selected.note || '';
     if (selected.isForm) {
       message = `${selected.name} vereist een formulier (geen email). ${message}`;
     }
-    text.textContent = message;
+    text.innerHTML = message;
     banner.style.display = 'block';
   } else {
     banner.style.display = 'none';
   }
 });
 
-function genereerMail() {
-  const naam = document.getElementById('naam').value.trim();
+function generateMail() {
+  const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
-  let bedrijf = bedrijfSelect.value;
+  let company = companySelect.value;
   const extra = extraInput.value.trim();
   const type = document.getElementById('type').value;
 
-  if (!naam || !email || !bedrijf) {
+  if (!name || !email || !company) {
     alert('Vul aub naam, email en een bedrijf in!');
     return;
   }
 
-  let ontvanger = '';
-  let bedrijfNaam = bedrijf;
+  let recipient = '';
+  let companyName = company;
   let isForm = false;
   let formUrl = '';
 
-  if (bedrijf === 'Andere') {
+  if (company === 'other') {
     if (!extra) {
       alert('Vul aub naam (en liefst email) van het bedrijf in!');
       return;
     }
     const parts = extra.split('-').map(p => p.trim());
-    bedrijfNaam = parts[0];
-    ontvanger = parts[1] || `privacy@${bedrijfNaam.toLowerCase().replace(/[^a-z0-9]/g,'')}.nl`;
+    companyName = parts[0];
+    recipient = parts[1] || `privacy@${companyName.toLowerCase().replace(/[^a-z0-9]/g,'')}.nl`;
   } else {
-    const selected = brokers.find(b => b.name === bedrijf);
+    const selected = brokers.find(b => b.name === company);
     if (selected) {
       if (selected.isForm) {
         isForm = true;
         formUrl = selected.formUrl;
-        ontvanger = formUrl;
+        recipient = formUrl;
       } else {
-        ontvanger = selected.email;
+        recipient = selected.email;
       }
     } else {
-      ontvanger = `privacy@${bedrijf.toLowerCase().replace(/[^a-z0-9]/g,'')}.nl`;
+      recipient = `privacy@${company.toLowerCase().replace(/[^a-z0-9]/g,'')}.nl`;
     }
   }
 
-  const onderwerpMap = {
-    bezwaar: 'Bezwaar tegen verwerking persoonsgegevens (GDPR Art. 21)',
-    wissen: 'Verzoek tot wissen persoonsgegevens (GDPR Art. 17)',
-    inzage: 'Verzoek tot inzage persoonsgegevens (GDPR Art. 15)',
-    beide: 'Bezwaar + wissen persoonsgegevens (GDPR Art. 21 & 17)'
+  const subjectMap = {
+    objection: 'Bezwaar tegen verwerking persoonsgegevens (GDPR Art. 21)',
+    erase: 'Verzoek tot wissen persoonsgegevens (GDPR Art. 17)',
+    access: 'Verzoek tot inzage persoonsgegevens (GDPR Art. 15)',
+    both: 'Bezwaar + wissen persoonsgegevens (GDPR Art. 21 & 17)'
   };
-  const onderwerp = onderwerpMap[type];
+  const subject = subjectMap[type];
 
   const body = `Geachte heer/mevrouw,
 
-Mijn naam is ${naam} en mijn email is ${email}.
+Mijn naam is ${name} en mijn email is ${email}.
 
 Ik oefen hierbij formeel mijn rechten uit onder de AVG/GDPR:
 
 ${
-  (type === 'bezwaar' || type === 'beide')
-    ? `- Bezwaar tegen verwerking van mijn persoonsgegevens voor marketing, profiling, tracking e.d. (Art. 21 GDPR). Ik wil geen verdere verwerking door ${bedrijfNaam}.\n`
+  (type === 'objection' || type === 'both')
+    ? `- Bezwaar tegen verwerking van mijn persoonsgegevens voor marketing, profiling, tracking e.d. (Art. 21 GDPR). Ik wil geen verdere verwerking door ${companyName}.\n`
     : ''
 }${
-  (type === 'wissen' || type === 'beide')
+  (type === 'erase' || type === 'both')
     ? `- Verzoek tot wissen van al mijn persoonsgegevens (Art. 17 GDPR, recht om vergeten te worden).\n`
     : ''
 }${
-  type === 'inzage'
+  type === 'access'
     ? `- Verzoek tot inzage in alle persoonsgegevens die u van mij verwerkt (Art. 15 GDPR), inclusief een kopie.\n`
     : ''
 }
@@ -250,9 +250,9 @@ ${
 Graag ontvang ik binnen 1 maand bevestiging en bewijs van actie. Bij weigering: gemotiveerde uitleg.
 
 Met vriendelijke groet,
-${naam}`;
+${name}`;
 
-  const selected = brokers.find(b => b.name === bedrijfNaam) || brokers.find(b => b.name === bedrijf);
+  const selected = brokers.find(b => b.name === companyName) || brokers.find(b => b.name === company);
   const loginOnly = selected && selected.loginOnly;
 
   if (isForm) {
@@ -260,7 +260,7 @@ ${naam}`;
       document.getElementById('result').innerHTML = `
         <h3>Geen publiek contactkanaal beschikbaar</h3>
         <div class="warning">
-          <p><strong>${bedrijfNaam}</strong> heeft geen publiek e-mailadres of formulier voor GDPR-verzoeken.</p>
+          <p><strong>${companyName}</strong> heeft geen publiek e-mailadres of formulier voor GDPR-verzoeken.</p>
           <p>Verzoeken verlopen alleen via de ingelogde account-omgeving op hun website.</p>
         </div>
       `;
@@ -271,7 +271,7 @@ ${naam}`;
       document.getElementById('result').innerHTML = `
         <h3>Let op: Dit bedrijf vereist een formulier</h3>
         <div class="warning">
-          <p><strong>${bedrijfNaam}</strong> accepteert geen email meer voor GDPR-verzoeken.</p>
+          <p><strong>${companyName}</strong> accepteert geen email meer voor GDPR-verzoeken.</p>
           <p>Je moet hun contact formulier gebruiken. De tekst is gekopieerd naar je clipboard.</p>
         </div>
         <h4>Template (gekopieerd):</h4>
@@ -293,12 +293,12 @@ ${naam}`;
       `;
     });
   } else {
-    const mailto = `mailto:${ontvanger}?subject=${encodeURIComponent(onderwerp)}&body=${encodeURIComponent(body)}`;
+    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     document.getElementById('result').innerHTML = `
       <h3>Klaar! Open de mail:</h3>
-      <p><strong>Naar:</strong> ${ontvanger}</p>
-      <p><strong>Onderwerp:</strong> ${onderwerp}</p>
+      <p><strong>Naar:</strong> ${recipient}</p>
+      <p><strong>Onderwerp:</strong> ${subject}</p>
       <h4>Template:</h4>
       <pre style="background:#f5f5f5; padding:1rem; border-radius:6px; overflow:auto; max-height:300px; border: 1px solid #ddd;">${body}</pre>
       <button onclick="window.location='${mailto}'">Open in mailprogramma</button>
@@ -311,6 +311,6 @@ ${naam}`;
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('brokerCount').innerHTML =
+  document.getElementById('broker-count').innerHTML =
     `<strong>${brokers.length} Nederlandse data brokers</strong> beschikbaar`;
 });

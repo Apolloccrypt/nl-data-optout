@@ -214,7 +214,7 @@ This is a **static site** – no backend, no database, no API.
 ## 📞 Need Help?
 
 - **GitHub Issues:** Bug reports, questions
-- **LinkedIn:** [@mickbeer](https://linkedin.com/in/mick-beer)
+- **LinkedIn:** [@mickbeer](https://www.linkedin.com/in/mick-beer/)
 - **Email:** Via LinkedIn (no public email to avoid spam)
 
 ---

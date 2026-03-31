@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-03-31
+
+### Added
+- **Bronlink bij Google** – update-banner toont nu een klikbare bronverwijzing naar het Medium-onderzoek (Volkskrant & Telegraaf)
+
+### Changed
+- **Naamgeving consistentie** – alle code-identifiers omgezet naar Engels en consistente conventies: camelCase voor JS-variabelen en -functies, kebab-case voor HTML IDs en CSS-klassen (`genereerMail` → `generateMail`, `bedrijf` → `company`, `ontvanger` → `recipient`, etc.)
+- **Form-waarden** – interne option-values omgezet naar Engels (`bezwaar` → `objection`, `wissen` → `erase`, `inzage` → `access`, `beide` → `both`)
+- **Donatie-knop** – minder opdringerig; verplaatst van prominente gele box naar een subtiele regel in de footer
+- **HTML/JS/CSS gesplitst** – code uitgesplitst in aparte bestanden voor betere onderhoudbaarheid (script.js, style.css)
+- **UI** – flashy kleuren en emoji gereduceerd voor een rustigere leeservaring
+
+### Fixed
+- **Broken Medium URLs** – alle verwijzingen naar `medium.com/p/75744f8645c6` en het lange artikel-pad vervangen door `https://medium.com/@mick.ronan.beer` (index.html, script.js, README.md)
+- **LinkedIn URL** – alle verwijzingen gecorrigeerd naar `https://www.linkedin.com/in/mick-beer/` (met `www.` en trailing slash) in index.html, README.md, CONTRIBUTING.md, DEPLOYMENT.md en config.yml; `@mickbeer`-mention is nu een klikbare link
+- **Relatieve links** – `CHANGELOG.md` en `LICENSE` in de footer verwijzen nu relatief, zodat de site niet breekt bij hosting buiten GitHub Pages
+- **Result div leeg** – lege `#result` div werd altijd getoond als groene balk; verborgen via `#result:empty { display: none }` in CSS
+- **Update-banner links** – note-tekst gebruikt nu `innerHTML` zodat bronlinks correct renderen
+- **Versie-inconsistentie** – site toonde v1.1.1 maar changelog liep slechts tot v1.1.0; v1.1.1 is nu alsnog gedocumenteerd (zie hieronder)
+
+---
+
+## [1.1.1] - 2026-03-22
+
+### Fixed
+- **Xandr e-mail** – `privacy@xandr.com` bouncete; vervangen door Microsoft privacy formulier met `isForm: true`
+- **SmartOcto e-mail** – `privacy@smartocto.com` bouncete; vervangen door geverifieerd DPO-adres `dpo@smartocto.com`
+- **JavaScript syntax** – ontbrekende komma's in brokers array veroorzaakten parse-fouten
+- **Ontbrekende category-velden** – Xandr en SmartOcto misten een `category` property
+- **Contact emails** – meerdere bedrijven bijgewerkt naar actuele adressen
+
+### Added
+- **Compliance waarschuwing Xandr** – notitie toegevoegd: 0% GDPR response rate (noyb 2024)
+
+---
+
 ## [1.1.0] - 2026-03-21
 
 ### Added
@@ -112,4 +148,4 @@ Wil je bijdragen? Zie [CONTRIBUTING.md](CONTRIBUTING.md)!
 
 ---
 
-<p align="center">Last update: 21 maart 2026</p>
+<p align="center">Last update: 31 maart 2026</p>

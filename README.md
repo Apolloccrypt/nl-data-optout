@@ -38,7 +38,7 @@ In maart 2026 testte ik 5 Nederlandse nieuwssites op cookie compliance. Bevindin
 
 **Oplossing:** Deze tool.
 
-📚 **Volledig onderzoek:** https://medium.com/p/75744f8645c6
+📚 **Volledig onderzoek:** https://medium.com/@mick.ronan.beer
 
 ---
 
@@ -212,7 +212,7 @@ Bijdragen welkom! Zie [CONTRIBUTING.md](CONTRIBUTING.md) voor richtlijnen.
 
 ### **Community:**
 - [GitHub Issues](https://github.com/Apolloccrypt/nl-data-optout/issues)
-- [LinkedIn: Mick Beer](https://linkedin.com/in/mick-beer)
+- [LinkedIn: Mick Beer](https://www.linkedin.com/in/mick-beer/)
 
 ---
 
@@ -240,11 +240,11 @@ Zie [LICENSE](LICENSE) voor details.
 ## 📞 Contact
 
 **Maker:** Mick Beer  
-**LinkedIn:** https://linkedin.com/in/mick-beer  
+**LinkedIn:** https://www.linkedin.com/in/mick-beer/  
 **GitHub:** https://github.com/Apolloccrypt  
 
 **Onderzoek:**  
-- [Medium artikel](https://medium.com/p/75744f8645c6) (volledig onderzoek)
+- [Medium artikel](https://medium.com/@mick.ronan.beer) (volledig onderzoek)
 - [LinkedIn post](https://linkedin.com/posts/mick-beer_nl-data-brokers-opt-out-tool-activity-7441146526682202112-F_v7)
 
 ---
