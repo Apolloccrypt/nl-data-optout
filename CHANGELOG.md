@@ -17,10 +17,14 @@ en commit-berichten volgen grotendeels de stijl van [Conventional Commits](https
 - **Naamgeving consistentie** – alle code-identifiers omgezet naar Engels en consistente conventies: camelCase voor JS-variabelen en -functies, kebab-case voor HTML IDs en CSS-klassen (`genereerMail` → `generateMail`, `bedrijf` → `company`, `ontvanger` → `recipient`, etc.)
 - **Form-waarden** – interne option-values omgezet naar Engels (`bezwaar` → `objection`, `wissen` → `erase`, `inzage` → `access`, `beide` → `both`)
 - **Donatie-knop** – minder opdringerig; verplaatst van prominente gele box naar een subtiele regel in de footer
-- **HTML/JS/CSS gesplitst** – code uitgesplitst in aparte bestanden voor betere onderhoudbaarheid (script.js, style.css) ([#1](https://github.com/Apolloccrypt/nl-data-optout/issues/1), [#2](https://github.com/Apolloccrypt/nl-data-optout/issues/2))
-- **UI** – flashy kleuren en emoji gereduceerd voor een rustigere leeservaring ([#3](https://github.com/Apolloccrypt/nl-data-optout/issues/3), [#4](https://github.com/Apolloccrypt/nl-data-optout/issues/4))
+- **HTML/JS/CSS gesplitst** – code uitgesplitst in aparte bestanden voor betere onderhoudbaarheid (script.js, style.css)
+- **UI** – flashy kleuren en emoji gereduceerd voor een rustigere leeservaring
 
 ### Fixed
+- **Microsoft** – `privacy@microsoft.com` bouncet; vervangen door Microsoft privacy formulier ([#1](https://github.com/Apolloccrypt/nl-data-optout/issues/1))
+- **Pinterest** – `privacy@pinterest.com` bouncet; vervangen door contactformulier ([#2](https://github.com/Apolloccrypt/nl-data-optout/issues/2))
+- **DPG Media** – `info@dpgmedia.nl` bouncet; vervangen door privacy-rights formulier ([#3](https://github.com/Apolloccrypt/nl-data-optout/issues/3))
+- **Bol.com** – `privacy@bol.com` bouncet; ingesteld als login-only (verzoeken alleen via ingelogde account-omgeving) ([#4](https://github.com/Apolloccrypt/nl-data-optout/issues/4))
 - **Broken Medium URLs** – alle verwijzingen naar `medium.com/p/75744f8645c6` en het lange artikel-pad vervangen door `https://medium.com/@mick.ronan.beer` (index.html, script.js, README.md)
 - **LinkedIn URL** – alle verwijzingen gecorrigeerd naar `https://www.linkedin.com/in/mick-beer/` (met `www.` en trailing slash) in index.html, README.md, CONTRIBUTING.md, DEPLOYMENT.md en config.yml; `@mickbeer`-mention is nu een klikbare link
 - **Relatieve links** – `CHANGELOG.md` en `LICENSE` in de footer verwijzen nu relatief, zodat de site niet breekt bij hosting buiten GitHub Pages
