@@ -75,6 +75,13 @@ button.secondary {
 
 button.secondary:hover { background: #616161; }
 
+button.lang {
+  background: #1565c0;
+  margin-left: 0;
+}
+
+button.lang:hover { background: #0d47a1; }
+
 #result:empty {
   display: none;
 }

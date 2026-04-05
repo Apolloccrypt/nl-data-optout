@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NL Data Brokers Opt-Out Tool - GDPR Art. 21, 17 & 15</title>
+  <title>EU Data Brokers Opt-Out Tool - GDPR Art. 21, 17 & 15</title>
   <meta name="description" content="Genereer gratis GDPR-verzoeken (Art. 21 bezwaar, Art. 17 wissen & Art. 15 inzage) naar 60+ Nederlandse data brokers, ad-tech, telecom, retail en media bedrijven." />
   <link rel="stylesheet" href="style.css">
 </head>
@@ -15,11 +15,11 @@
     <p><strong>Dit is GEEN juridisch advies.</strong> Deze tool helpt bij het uitoefenen van GDPR-rechten (Art. 21, 17, 15). Raadpleeg een privacy-advocaat of autoriteitpersoonsgegevens.nl bij twijfel. Maker niet aansprakelijk. Eigen verantwoordelijkheid. <a href="#disclaimer-full" style="color:#856404;">Volledige disclaimer onderaan</a>.</p>
   </div>
 
-  <h1>NL Data Brokers Opt-Out Tool</h1>
-  <p>Genereer snel GDPR Art. 21 (bezwaar), Art. 17 (wissen) of Art. 15 (inzage) mails naar Nederlandse data brokers, ad-tech, telecom, retail en media bedrijven. Alles lokaal in je browser - geen data-opslag.</p>
+  <h1>EU Data Brokers Opt-Out Tool</h1>
+  <p>Genereer snel GDPR Art. 21 (bezwaar), Art. 17 (wissen) of Art. 15 (inzage) mails naar Europese data brokers, ad-tech, telecom, retail en media bedrijven. Alles lokaal in je browser - geen data-opslag.</p>
 
   <div class="broker-count" id="broker-count">
-    50+ Nederlandse data brokers beschikbaar
+    50+ Data brokers beschikbaar
   </div>
 
   <!-- UPDATE NOTICE BANNER -->
@@ -47,7 +47,10 @@
       <option value="both">Beide (Art. 21 + 17)</option>
     </select>
 
-    <button type="button" onclick="generateMail()">Genereer bezwaarmail</button>
+    <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:flex-start;">
+      <button type="button" onclick="generateMail()">Genereer bezwaarmail</button>
+      <button type="button" class="lang" id="lang-toggle" onclick="toggleEmailLang()">Email: NL</button>
+    </div>
   </form>
 
   <div id="result"></div>
@@ -93,7 +96,7 @@
   <footer>
     <p>Made voor privacy door <a href="https://www.linkedin.com/in/mick-beer/">Mick Beer</a></p>
     <p><a href="https://github.com/Apolloccrypt/nl-data-optout">Broncode op GitHub</a> - Open Source - <a href="LICENSE">MIT License</a></p>
-    <p style="font-size: 0.8rem; color: #999; margin-top: 1rem;">v1.2.0 - Laatste update: 31 maart 2026 - <a href="CHANGELOG.md" style="color:#999;">Changelog</a></p>
+    <p style="font-size: 0.8rem; color: #999; margin-top: 1rem;">v1.2.1 - Laatste update: 6 april 2026 - <a href="CHANGELOG.md" style="color:#999;">Changelog</a></p>
     <p style="display:inline-block; background:#fff3cd; color:#856404; border:1px solid #ffc107; border-radius:6px; padding:0.4rem 0.9rem; margin-top:0.75rem; font-size:0.85rem;">Dit project is onafhankelijk en gratis. <a href="https://www.buymeacoffee.com/mickbeer" target="_blank" rel="noopener noreferrer" style="color:#856404; font-weight:bold;">Buy me a coffee</a> als je het nuttig vond.</p>
   </footer>
 

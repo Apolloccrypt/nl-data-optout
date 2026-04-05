@@ -10,8 +10,18 @@ en commit-berichten volgen grotendeels de stijl van [Conventional Commits](https
 
 ## [Unreleased]
 
+---
+
+## [1.2.1] - 2026-04-06
+
 ### Added
-- Wayback Machine / Internet Archive toegevoegd met contactadres info@archive.org
+- Wayback Machine / Internet Archive toegevoegd als data broker (info@archive.org)
+- Nederlands / Engels taalschakelaar bij de e-mail generatieknop
+
+### Changed
+- Broker-teller gewijzigd van "Nederlandse" naar "Europese" data brokers
+- Kleine verbeteringen aan teksten
+- Ongebruikte code verwijderd (dead assignments, dubbele `.find()`, overbodige `DOMContentLoaded` wrapper, gedupliceerde stijl)
 
 ---
 
