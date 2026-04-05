@@ -1,3 +1,10 @@
+let emailLang = 'nl';
+
+function toggleEmailLang() {
+  emailLang = emailLang === 'nl' ? 'en' : 'nl';
+  document.getElementById('lang-toggle').textContent = `Email: ${emailLang.toUpperCase()}`;
+}
+
 const brokers = [
   // === CREDIT BUREAUS & DATA ENRICHMENT ===
   { name: "Experian Nederland", email: "privacy@experian.nl", category: "Credit Bureaus", note: "AP boete 2.7M (2025) voor onvoldoende vendor disclosure" },
@@ -65,6 +72,7 @@ const brokers = [
   { name: "NPO / NOS", email: "privacy@npo.nl", category: "Media & Publishers", note: "Pre-consent tracking gedetecteerd (cookies voor banner)" },
   { name: "Mediahuis (Telegraaf, NHD)", email: "privacy@mediahuis.nl", category: "Media & Publishers" },
   { name: "Talpa Network", email: "privacy@talpanetwork.com", category: "Media & Publishers" },
+  { name: "Wayback Machine / Internet Archive", email: "info@archive.org", category: "Media & Publishers" },
 
   // === TELECOM ===
   { name: "KPN", email: "privacy@kpn.com", category: "Telecom" },
@@ -98,7 +106,6 @@ const brokers = [
   {
     name: "SmartOcto",
     email: "dpo@smartocto.com",
-    altEmail: "info@smartocto.com",
     category: "Analytics",
     note: "DPO verified from official privacy policy. NL-based, GDPR compliant."
   },
@@ -179,6 +186,8 @@ companySelect.addEventListener('change', () => {
   }
 });
 
+const PRE_STYLE = 'background:#f5f5f5; padding:1rem; border-radius:6px; overflow:auto; max-height:300px; border:1px solid #ddd;';
+
 function generateMail() {
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
@@ -226,7 +235,6 @@ function generateMail() {
       if (selected.isForm) {
         isForm = true;
         formUrl = selected.formUrl;
-        recipient = formUrl;
       } else {
         recipient = selected.email;
       }
@@ -235,7 +243,12 @@ function generateMail() {
     }
   }
 
-  const subjectMap = {
+  const subjectMap = emailLang === 'en' ? {
+    objection: 'Objection to personal data processing (GDPR Art. 21)',
+    erase: 'Request for erasure of personal data (GDPR Art. 17)',
+    access: 'Request for access to personal data (GDPR Art. 15)',
+    both: 'Objection + erasure of personal data (GDPR Art. 21 & 17)'
+  } : {
     objection: 'Bezwaar tegen verwerking persoonsgegevens (GDPR Art. 21)',
     erase: 'Verzoek tot wissen persoonsgegevens (GDPR Art. 17)',
     access: 'Verzoek tot inzage persoonsgegevens (GDPR Art. 15)',
@@ -243,7 +256,31 @@ function generateMail() {
   };
   const subject = subjectMap[type];
 
-  const body = `Geachte heer/mevrouw,
+  const body = emailLang === 'en'
+    ? `Dear Sir/Madam,
+
+My name is ${name} and my email address is ${email}.
+
+I hereby formally exercise my rights under the GDPR:
+
+${
+  (type === 'objection' || type === 'both')
+    ? `- Objection to the processing of my personal data for marketing, profiling, tracking, etc. (Art. 21 GDPR). I request that ${companyName} ceases all such processing.\n`
+    : ''
+}${
+  (type === 'erase' || type === 'both')
+    ? `- Request for erasure of all my personal data (Art. 17 GDPR, right to be forgotten).\n`
+    : ''
+}${
+  type === 'access'
+    ? `- Request for access to all personal data you process about me (Art. 15 GDPR), including a copy.\n`
+    : ''
+}
+Please confirm within 1 month and provide proof of action. In case of refusal: a reasoned explanation.
+
+Kind regards,
+${name}`
+    : `Geachte heer/mevrouw,
 
 Mijn naam is ${name} en mijn email is ${email}.
 
@@ -262,13 +299,12 @@ ${
     ? `- Verzoek tot inzage in alle persoonsgegevens die u van mij verwerkt (Art. 15 GDPR), inclusief een kopie.\n`
     : ''
 }
-
 Graag ontvang ik binnen 1 maand bevestiging en bewijs van actie. Bij weigering: gemotiveerde uitleg.
 
 Met vriendelijke groet,
 ${name}`;
 
-  const selected = brokers.find(b => b.name === companyName) || brokers.find(b => b.name === company);
+  const selected = brokers.find(b => b.name === company);
   const loginOnly = selected && selected.loginOnly;
 
   const resultEl = document.getElementById('result');
@@ -323,7 +359,7 @@ ${name}`;
       }
 
       const pre = document.createElement('pre');
-      pre.style.cssText = 'background:#f5f5f5; padding:1rem; border-radius:6px; overflow:auto; max-height:300px; border:1px solid #ddd;';
+      pre.style.cssText = PRE_STYLE;
       pre.textContent = body;
       resultEl.appendChild(pre);
 
@@ -409,11 +445,4 @@ ${name}`;
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  const brokerCountEl = document.getElementById('broker-count');
-  brokerCountEl.innerHTML = '';
-  const strong = document.createElement('strong');
-  strong.textContent = `${brokers.length} Nederlandse data brokers`;
-  brokerCountEl.appendChild(strong);
-  brokerCountEl.appendChild(document.createTextNode(' beschikbaar'));
-});
+document.getElementById('broker-count').innerHTML = `<strong>${brokers.length} Europese data brokers</strong> beschikbaar`;
