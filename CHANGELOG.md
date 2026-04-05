@@ -8,10 +8,6 @@ en commit-berichten volgen grotendeels de stijl van [Conventional Commits](https
 
 ---
 
-## [Unreleased]
-
----
-
 ## [1.2.1] - 2026-04-06
 
 ### Added
@@ -21,7 +17,7 @@ en commit-berichten volgen grotendeels de stijl van [Conventional Commits](https
 ### Changed
 - Broker-teller gewijzigd van "Nederlandse" naar "Europese" data brokers
 - Kleine verbeteringen aan teksten
-- Ongebruikte code verwijderd (dead assignments, dubbele `.find()`, overbodige `DOMContentLoaded` wrapper, gedupliceerde stijl)
+- Ongebruikte code verwijderd
 
 ---
 
