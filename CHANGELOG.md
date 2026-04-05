@@ -8,6 +8,13 @@ en commit-berichten volgen grotendeels de stijl van [Conventional Commits](https
 
 ---
 
+## [Unreleased]
+
+### Added
+- Wayback Machine / Internet Archive toegevoegd met contactadres info@archive.org
+
+---
+
 ## [1.2.0] - 2026-03-31
 
 ### Added

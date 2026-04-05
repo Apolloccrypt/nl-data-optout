@@ -65,6 +65,7 @@ const brokers = [
   { name: "NPO / NOS", email: "privacy@npo.nl", category: "Media & Publishers", note: "Pre-consent tracking gedetecteerd (cookies voor banner)" },
   { name: "Mediahuis (Telegraaf, NHD)", email: "privacy@mediahuis.nl", category: "Media & Publishers" },
   { name: "Talpa Network", email: "privacy@talpanetwork.com", category: "Media & Publishers" },
+  { name: "Wayback Machine / Internet Archive", email: "info@archive.org", category: "Media & Publishers" },
 
   // === TELECOM ===
   { name: "KPN", email: "privacy@kpn.com", category: "Telecom" },
