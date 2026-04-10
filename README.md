@@ -27,16 +27,7 @@ Onderzoek: https://medium.com/@mick.ronan.beer
 
 ## Privacy
 
-Alles draait lokaal. Geen server, geen opslag, geen tracking. De tool genereert alleen tekst, jij verstuurt de mail zelf.
-
-## v2.0.0 — Hugo rebuild
-
-Vanaf v2.0.0 is de site gebouwd met [Hugo](https://gohugo.io/):
-
-- Meertalig (NL standaard, EN beschikbaar)
-- Nieuw visueel ontwerp geïnspireerd op [mickbeer.com](https://mickbeer.com)
-- GitHub Actions deploy op push naar `main`
-- Uitgebreide footer met changelog, donatie en contact links
+Alles draait lokaal. Geen server, geen opslag, geen tracking. De tool genereert alleen tekst, jij verstuurt de mail dus zelf.
 
 ## Bijdragen
 
