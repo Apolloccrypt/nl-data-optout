@@ -21,5 +21,5 @@ Geen server-side code, geen tracking.
 
 ## Vragen
 
-https://github.com/Apolloccrypt/nl-data-optout/issues
-https://www.linkedin.com/in/mick-beer/
+- https://github.com/Apolloccrypt/nl-data-optout/issues
+- https://www.linkedin.com/in/mick-beer/
