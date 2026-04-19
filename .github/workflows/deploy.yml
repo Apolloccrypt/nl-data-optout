@@ -38,7 +38,7 @@ jobs:
         run: hugo --minify --baseURL "https://apolloccrypt.github.io/nl-data-optout/"
 
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
 
