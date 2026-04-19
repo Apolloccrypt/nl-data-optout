@@ -8,6 +8,19 @@ en commit-berichten volgen grotendeels de stijl van [Conventional Commits](https
 
 ---
 
+## [2.0.2] - 2026-04-19
+
+### Changed
+- dubbele GitHub Actions workflow verwijderd (`deploy.yml` conflicteerde met `hugo.yml`)
+- alle Actions gepind op SHA-hash voor reproduceerbare en veilige builds
+- Actions bijgewerkt naar nieuwste versies: `checkout` v6.0.2, `upload-pages-artifact` v5.0.0, `deploy-pages` v5.0.0
+- `renovate.json` verwijderd (vereist extern mend.io account); Dependabot beheert voortaan dependency-updates
+- Bootstrap bijgewerkt van 5.3.3 naar 5.3.8
+- Bootstrap Icons bijgewerkt van 1.11.3 naar 1.13.1
+- dubbele AppNexus (Xandr) entry verwijderd uit brokerlijst; de uitgebreide Xandr-entry was al correct en compleet
+
+---
+
 ## [2.0.1] - 2026-04-10
 
 ### Changed

@@ -136,7 +136,6 @@ const brokers = [
     isForm: true
   },
   { name: "Amazon Ads", email: "privacy@amazon.com", category: "Ad-Tech & Tracking" },
-  { name: "AppNexus (Xandr)", email: "privacy@xandr.com", category: "Ad-Tech & Tracking" },
   { name: "AdForm", email: "privacy@adform.com", category: "Ad-Tech & Tracking" },
   { name: "Sizmek (Amazon)", email: "privacy@sizmek.com", category: "Ad-Tech & Tracking" },
   { name: "The Trade Desk", email: "privacy@thetradedesk.com", category: "Ad-Tech & Tracking" },
