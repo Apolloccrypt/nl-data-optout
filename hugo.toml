@@ -23,7 +23,7 @@ disableKinds = ["taxonomy", "term"]
 
 [params]
   github = "https://github.com/Apolloccrypt/nl-data-optout"
-  version = "2.0.1"
+  version = "2.0.2"
   author = "Mick Beer"
   authorUrl = "https://mickbeer.com"
   linkedin = "https://www.linkedin.com/in/mick-beer/"
