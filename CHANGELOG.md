@@ -14,6 +14,7 @@ en commit-berichten volgen grotendeels de stijl van [Conventional Commits](https
 - dubbele GitHub Actions workflow verwijderd (`deploy.yml` conflicteerde met `hugo.yml`)
 - alle Actions gepind op SHA-hash voor reproduceerbare en veilige builds
 - Actions bijgewerkt naar nieuwste versies: `checkout` v6.0.2, `upload-pages-artifact` v5.0.0, `deploy-pages` v5.0.0
+- `baseURL` wordt nu dynamisch berekend via `GITHUB_REPOSITORY_OWNER` en `GITHUB_REPOSITORY`, zodat forks automatisch de juiste paden genereren
 - `renovate.json` verwijderd (vereist extern mend.io account); Dependabot beheert voortaan dependency-updates
 - Bootstrap bijgewerkt van 5.3.3 naar 5.3.8
 - Bootstrap Icons bijgewerkt van 1.11.3 naar 1.13.1
