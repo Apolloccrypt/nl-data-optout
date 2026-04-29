@@ -36,3 +36,9 @@ package-lock.json
 # Personal notes
 notes.md
 TODO.md
+
+# Hugo build output
+/public/
+/resources/
+.hugo_build.lock
+/.claude

@@ -1,115 +1,88 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+Alle noemenswaardige wijzigingen aan dit project worden in dit bestand bijgehouden.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+Het formaat is gebaseerd op [Keep a Changelog](https://keepachangelog.com/nl/1.1.0/),
+dit project hanteert [Semantic Versioning](https://semver.org/lang/nl/),
+en commit-berichten volgen grotendeels de stijl van [Conventional Commits](https://www.conventionalcommits.org/nl/v1.0.0/).
+
+---
+
+## [2.0.2] - 2026-04-19
+
+### Changed
+- dubbele GitHub Actions workflow verwijderd (`deploy.yml` conflicteerde met `hugo.yml`)
+- alle Actions gepind op SHA-hash voor reproduceerbare en veilige builds
+- Actions bijgewerkt naar nieuwste versies: `checkout` v6.0.2, `upload-pages-artifact` v5.0.0, `deploy-pages` v5.0.0
+- `baseURL` wordt nu dynamisch berekend via `GITHUB_REPOSITORY_OWNER` en `GITHUB_REPOSITORY`, zodat forks automatisch de juiste paden genereren
+- `renovate.json` verwijderd (vereist extern mend.io account); Dependabot beheert voortaan dependency-updates
+- Bootstrap bijgewerkt van 5.3.3 naar 5.3.8
+- Bootstrap Icons bijgewerkt van 1.11.3 naar 1.13.1
+- dubbele AppNexus (Xandr) entry verwijderd uit brokerlijst; de uitgebreide Xandr-entry was al correct en compleet
+
+---
+
+## [2.0.1] - 2026-04-10
+
+### Changed
+- visuele stijl gelijkgetrokken met [mickbeer.com](https://mickbeer.com)
+- contrast en kleurproblemen opgelost: donate-knop, dark mode kleurtokens, taalschakelaar separator
+- footer ingekort: toont nu alleen versienummer en datum
+
+---
+
+## [2.0.0] - 2026-04-10
+
+### Changed
+- volledige herbouw als Hugo statische site (van losse index.html naar Hugo-template systeem)
+- meertalige ondersteuning: Nederlands (standaard) en Engels via Hugo i18n
+- nieuwe visuele stijl geïnspireerd op [mickbeer.com](https://mickbeer.com): crème achtergrond, Playfair Display serif headings, amber accenten
+- GitHub Pages URL: `https://apolloccrypt.github.io/nl-data-optout/`
+- footer uitgebreid: changelog-link, versienummer, donatie-knop, LinkedIn en Medium links
+- donatie-knop (Buy me a coffee) in footer van elke pagina
+- GitHub Actions workflow bijgewerkt voor Hugo deploy op push naar `main`
+- "Over dit project" sectie uitgebreid met toelichting over reikwijdte: NL-markt + buitenlandse partijen actief in Nederland
+- alle UI-strings in script.js tweetalig (Nederlands/Engels) via `window.SITE_LANG`
+
+### Fixed
+- broker-teller toont correct "Nederlandse data brokers"
+
+---
+
+## [1.2.1] - 2026-04-06
+
+- Wayback Machine / Internet Archive toegevoegd als data broker
+- NL/EN taalschakelaar bij e-mail generatieknop
+- Broker-teller gecorrigeerd naar "Nederlandse data brokers"
+
+---
+
+## [1.2.0] - 2026-03-31
+
+- Code uitgesplitst in script.js en style.css
+- Identifiers omgezet naar Engels (camelCase JS, kebab-case HTML/CSS)
+- Microsoft ([#1](https://github.com/Apolloccrypt/nl-data-optout/issues/1)), Pinterest ([#2](https://github.com/Apolloccrypt/nl-data-optout/issues/2)), DPG Media ([#3](https://github.com/Apolloccrypt/nl-data-optout/issues/3)) omgezet naar formulier; Bol.com ([#4](https://github.com/Apolloccrypt/nl-data-optout/issues/4)) login-only
+- Documentatie (README, CONTRIBUTING, DEPLOYMENT, CHANGELOG) ingekort
+
+---
+
+## [1.1.1] - 2026-03-22
+
+- Xandr en SmartOcto contactadressen gecorrigeerd (bouncende e-mails)
+- Xandr: 0% GDPR response rate toegevoegd (noyb 2024)
+- Parse-fouten in brokers array opgelost
 
 ---
 
 ## [1.1.0] - 2026-03-21
 
-### Added
-- **Meta/Facebook formulier fix** – detecteert dat Meta geen email meer accepteert, geeft formulier instructies
-- **Notes systeem** – waarschuwingsbanner voor bedrijven met speciale instructies
-- **60+ brokers** – uitgebreide lijst (was 25)
-- **Categorieën teller** – toont aantal brokers per categorie in dropdown
-- **Dark pattern waarschuwing** – bij formulier-vereiste bedrijven
-- **Kopieer naar clipboard** knop – makkelijker copy-paste
-- **Changelog link** in footer
-- **Bug report link** in disclaimer
-- **GitHub Issues templates** (broken contact, feature request)
-
-### Changed
-- **UI verbeteringen** – betere warnings, info boxes, button styling
-- **Broker object structuur** – toegevoegd: `note`, `isForm`, `formUrl` fields
-- **Email template** – duidelijkere formatting
-- **Footer** – LinkedIn link, versie nummer, changelog link
-- **Result box** – betere formatting, copy button, tips
-
-### Fixed
-- **Meta contact** – `datarequests@support.facebook.com` vervangen door formulier
-- **JavaScript escaping** – backticks en dollar signs in template copy
-- **Mobile responsive** – betere display op kleine schermen
-
-### Documentation
-- README.md volledig herschreven
-- CONTRIBUTING.md toegevoegd
-- Issue templates toegevoegd
-- Changelog gestart
+- 60+ brokers (was 25), verdeeld in categorieen met teller
+- Formulierdetectie met waarschuwingsbanner en dark pattern notitie
+- Kopieer-naar-klembord knop
+- Meta omgezet naar formulier
 
 ---
 
 ## [1.0.0] - 2026-03-20
 
-### Added
-- **Eerste release** – 25 Nederlandse data brokers
-- **GDPR Art. 21, 17, 15** – bezwaar, wissen, inzage
-- **Categorieën** – Credit Bureaus, Ad-Tech, Media, Telecom, Retail
-- **"Ander bedrijf" optie** – handmatige invoer
-- **100% lokaal** – geen server, geen tracking
-- **MIT License** – open source
-- **GitHub Pages** – live hosting
-
-### Features
-- Naam + email input
-- Bedrijf selectie (dropdown met categorieën)
-- Type verzoek (bezwaar / wissen / inzage / beide)
-- Automatische mailto: link generatie
-- Email template met GDPR artikelen
-- Volledige disclaimer
-- Mobile-friendly design
-
----
-
-## Toekomstige Updates
-
-### Geplanned
-- [ ] **English version** (international brokers)
-- [ ] **CSV export** – track welke verzoeken je verstuurd hebt
-- [ ] **Response tracker** – check of bedrijven binnen 1 maand reageren
-- [ ] **EU brokers** – uitbreiding naar andere EU landen
-- [ ] **API voor automatisering** – bulk verzoeken (optioneel)
-
-### Community Requests
-- [ ] Browser extension (optioneel)
-- [ ] Template customization (eigen tekst)
-- [ ] Multi-language support
-
----
-
-## Contact veranderingen
-
-### Meta/Facebook (maart 2026)
-- **Oud:** `datarequests@support.facebook.com`
-- **Nieuw:** Contact formulier verplicht
-- **URL:** https://www.facebook.com/help/contact/540977946302970
-- **Reden:** Dark pattern – email vervangen door formulier (meer friction)
-- **Gemeld door:** Tobias L. (LinkedIn community)
-- **Fix:** v1.1.0
-
-### Rapporteer contact wijzigingen via GitHub Issues!
-
----
-
-## Versie Nummering
-
-We gebruiken [Semantic Versioning](https://semver.org/):
-
-- **MAJOR** (1.x.x) – Breaking changes (bijv. volledige UI redesign)
-- **MINOR** (x.1.x) – Nieuwe features (bijv. nieuwe brokers, nieuwe functionaliteit)
-- **PATCH** (x.x.1) – Bug fixes, contact updates, kleine verbeteringen
-
----
-
-## Contributors
-
-- **Mick Beer** (@Apolloccrypt) – Creator, maintainer
-- **Tobias L.** – Meta contact update report
-- **Community** – Bug reports, feature requests
-
-Wil je bijdragen? Zie [CONTRIBUTING.md](CONTRIBUTING.md)!
-
----
-
-<p align="center">Last update: 21 maart 2026</p>
+- Eerste release: 25 NL data brokers, Art. 15/17/21, lokaal, MIT

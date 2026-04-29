@@ -1,0 +1,222 @@
+{{ define "main" }}
+
+<!-- Short disclaimer -->
+<aside class="disclaimer-aside mb-5">
+  {{ i18n "disclaimer_short" }}
+  <a href="https://www.autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener noreferrer"
+     style="color:var(--ink-muted);">{{ i18n "disclaimer_dpa" }}</a>.
+  <a href="#disclaimer-full" style="color:var(--ink-muted);">{{ i18n "disclaimer_full_link" }}</a>
+</aside>
+
+<!-- Hero -->
+<div class="mb-5" style="max-width:640px;">
+  <h1 class="mb-3" style="font-size:2.5rem; line-height:1.1; letter-spacing:-.03em; font-weight:700;">
+    {{ i18n "hero_title" | safeHTML }}
+  </h1>
+  <p class="mb-4" style="font-size:1rem; line-height:1.7; color:var(--ink-muted);">
+    {{ i18n "hero_description" }}
+  </p>
+  <span class="broker-badge" id="broker-count">62 {{ i18n "hero_broker_label" }}</span>
+</div>
+
+<!-- Per-company notice -->
+<div class="d-none mb-4 update-banner" id="update-banner">
+  <i class="bi bi-info-circle me-2"></i><span id="update-text"></span>
+</div>
+
+<!-- Form + Result -->
+<div class="row g-5 mb-5">
+
+  <div class="col-lg-5">
+    <span class="section-label">{{ i18n "form_title" }}</span>
+    <form id="optout-form" novalidate>
+
+      <div class="mb-3">
+        <label for="fullname" class="form-label fw-medium">
+          {{ i18n "label_name" }} <span style="color:#e05252;">*</span>
+        </label>
+        <input type="text" class="form-control" id="fullname" required
+               placeholder="{{ i18n "placeholder_name" }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label fw-medium">
+          {{ i18n "label_email" }} <span style="color:#e05252;">*</span>
+        </label>
+        <input type="email" class="form-control" id="email" required
+               placeholder="{{ i18n "placeholder_email" }}">
+      </div>
+
+      <div class="mb-3">
+        <label for="company" class="form-label fw-medium">
+          {{ i18n "label_company" }} <span style="color:#e05252;">*</span>
+        </label>
+        <select class="form-select" id="company" required>
+          <option value="">{{ i18n "placeholder_company" }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3 d-none" id="other-company-group">
+        <label for="extra-company" class="form-label fw-medium">
+          {{ i18n "label_other_company" }}
+        </label>
+        <input type="text" class="form-control" id="extra-company"
+               placeholder="{{ i18n "placeholder_other" }}">
+        <div class="form-text" style="font-size:.8rem;">{{ i18n "placeholder_other_hint" }}</div>
+      </div>
+
+      <div class="mb-4">
+        <label for="type" class="form-label fw-medium">
+          {{ i18n "label_type" }}
+        </label>
+        <select class="form-select" id="type">
+          <option value="objection">{{ i18n "type_objection" }}</option>
+          <option value="erase">{{ i18n "type_erase" }}</option>
+          <option value="access">{{ i18n "type_access" }}</option>
+          <option value="both">{{ i18n "type_both" }}</option>
+        </select>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2">
+        <button type="button" class="btn-primary-custom" onclick="generateMail()">
+          <i class="bi bi-envelope me-2"></i>{{ i18n "btn_generate" }}
+        </button>
+        <button type="button" class="btn-outline-custom"
+                id="lang-toggle" onclick="toggleEmailLang()">Email: NL</button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="col-lg-7">
+    <div id="result"></div>
+  </div>
+
+</div>
+
+<!-- GDPR Rights -->
+<section class="mb-5 pt-4" style="border-top:1px solid var(--border);">
+  <span class="section-label">{{ i18n "rights_title" }}</span>
+  <div class="row g-3 mb-3">
+
+    <div class="col-md-4">
+      <div class="rights-card h-100">
+        <span class="art-number">Art. 15</span>
+        <p class="fw-semibold mb-2 mt-1" style="font-size:.9375rem; font-family:'Playfair Display',serif;">
+          {{ if eq .Lang "nl" }}Recht op inzage{{ else }}Right of access{{ end }}
+        </p>
+        <p style="font-size:.8125rem; line-height:1.6; color:var(--ink-muted);" class="mb-3">
+          {{ i18n "art15_text" }}
+        </p>
+        <div class="d-flex flex-wrap gap-2" style="font-size:.75rem;">
+          <a href="{{ i18n "art15_url_info" }}" target="_blank" rel="noopener noreferrer"
+             style="color:var(--ink-muted); text-decoration:none;">
+            <i class="bi bi-box-arrow-up-right me-1"></i>{{ i18n "rights_official_text" }}
+          </a>
+          <a href="{{ i18n "art15_url_ap" }}" target="_blank" rel="noopener noreferrer"
+             style="color:var(--ink-muted); text-decoration:none;">
+            <i class="bi bi-box-arrow-up-right me-1"></i>{{ i18n "rights_ap_page" }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="rights-card h-100">
+        <span class="art-number">Art. 17</span>
+        <p class="fw-semibold mb-2 mt-1" style="font-size:.9375rem; font-family:'Playfair Display',serif;">
+          {{ if eq .Lang "nl" }}Recht op gegevens verwijderen{{ else }}Right to erasure{{ end }}
+        </p>
+        <p style="font-size:.8125rem; line-height:1.6; color:var(--ink-muted);" class="mb-3">
+          {{ i18n "art17_text" }}
+        </p>
+        <div class="d-flex flex-wrap gap-2" style="font-size:.75rem;">
+          <a href="{{ i18n "art17_url_info" }}" target="_blank" rel="noopener noreferrer"
+             style="color:var(--ink-muted); text-decoration:none;">
+            <i class="bi bi-box-arrow-up-right me-1"></i>{{ i18n "rights_official_text" }}
+          </a>
+          <a href="{{ i18n "art17_url_ap" }}" target="_blank" rel="noopener noreferrer"
+             style="color:var(--ink-muted); text-decoration:none;">
+            <i class="bi bi-box-arrow-up-right me-1"></i>{{ i18n "rights_ap_page" }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="rights-card h-100">
+        <span class="art-number">Art. 21</span>
+        <p class="fw-semibold mb-2 mt-1" style="font-size:.9375rem; font-family:'Playfair Display',serif;">
+          {{ if eq .Lang "nl" }}Recht van bezwaar{{ else }}Right to object{{ end }}
+        </p>
+        <p style="font-size:.8125rem; line-height:1.6; color:var(--ink-muted);" class="mb-3">
+          {{ i18n "art21_text" }}
+        </p>
+        <div class="d-flex flex-wrap gap-2" style="font-size:.75rem;">
+          <a href="{{ i18n "art21_url_info" }}" target="_blank" rel="noopener noreferrer"
+             style="color:var(--ink-muted); text-decoration:none;">
+            <i class="bi bi-box-arrow-up-right me-1"></i>{{ i18n "rights_official_text" }}
+          </a>
+          <a href="{{ i18n "art21_url_ap" }}" target="_blank" rel="noopener noreferrer"
+             style="color:var(--ink-muted); text-decoration:none;">
+            <i class="bi bi-box-arrow-up-right me-1"></i>{{ i18n "rights_ap_page" }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p style="font-size:.75rem; color:var(--ink-muted);">
+    <i class="bi bi-book me-1"></i>
+    <a href="https://eur-lex.europa.eu/legal-content/{{ if eq .Lang "nl" }}NL{{ else }}EN{{ end }}/TXT/?uri=CELEX%3A32016R0679"
+       target="_blank" rel="noopener noreferrer" style="color:var(--ink-muted);">
+      {{ i18n "rights_eurlex" }} (Regulation (EU) 2016/679)
+    </a>
+  </p>
+</section>
+
+<!-- Disclaimer -->
+<section id="disclaimer-full" class="mb-5 pt-4" style="border-top:1px solid var(--border);">
+  <span class="section-label">{{ i18n "disclaimer_title" }}</span>
+  <ol class="mb-3" style="font-size:.875rem; color:var(--ink-muted); line-height:1.75;">
+    <li>{{ i18n "disclaimer_1" | safeHTML }}</li>
+    <li>{{ i18n "disclaimer_2" | safeHTML }}</li>
+    <li>{{ i18n "disclaimer_3" | safeHTML }}</li>
+    <li>{{ i18n "disclaimer_4" | safeHTML }}</li>
+    <li>{{ i18n "disclaimer_5" | safeHTML }}</li>
+    <li>
+      {{ i18n "disclaimer_6" | safeHTML }}
+      <a href="{{ site.Params.github }}/issues" target="_blank" rel="noopener noreferrer">
+        {{ i18n "disclaimer_issues" }}</a>.
+    </li>
+  </ol>
+  <p class="mb-0" style="font-size:.8125rem; color:var(--ink-muted);">{{ i18n "disclaimer_accept" }}</p>
+</section>
+
+<!-- About -->
+<section class="mb-5 pt-4" style="border-top:1px solid var(--border);">
+  <span class="section-label">{{ i18n "about_title" }}</span>
+  <div style="max-width:640px; font-size:.875rem; color:var(--ink-muted); line-height:1.75;">
+    <p>{{ i18n "about_intro" }}</p>
+
+    <p class="mb-1 fw-medium" style="color:var(--ink);">{{ i18n "about_scope_title" }}</p>
+    <p>{{ i18n "about_scope" }}</p>
+
+    <p class="mb-1 fw-medium" style="color:var(--ink);">{{ i18n "about_goals_title" }}</p>
+    <ul>
+      <li>{{ i18n "about_goal1" }}</li>
+      <li>{{ i18n "about_goal2" }}</li>
+      <li>{{ i18n "about_goal3" }}</li>
+    </ul>
+    <p class="mb-0">{{ i18n "about_footer" }}</p>
+  </div>
+</section>
+
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+  window.SITE_LANG = '{{ .Lang }}';
+</script>
+<script src="{{ "js/script.js" | relURL }}"></script>
+{{ end }}

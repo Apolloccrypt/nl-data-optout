@@ -1,0 +1,30 @@
+baseURL = "https://apolloccrypt.github.io/nl-data-optout/"
+defaultContentLanguage = "nl"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[languages]
+  [languages.nl]
+    languageCode = "nl"
+    languageName = "Nederlands"
+    title = "NL Data Opt-Out"
+    weight = 1
+    [languages.nl.params]
+      description = "Genereer gratis GDPR-verzoeken naar 60+ Nederlandse data brokers. 100% lokaal — geen data opgeslagen."
+
+  [languages.en]
+    languageCode = "en"
+    languageName = "English"
+    title = "NL Data Opt-Out"
+    weight = 2
+    [languages.en.params]
+      description = "Generate free GDPR requests to 60+ Dutch data brokers. Runs 100% locally — no data stored."
+
+[params]
+  github = "https://github.com/Apolloccrypt/nl-data-optout"
+  version = "2.0.2"
+  author = "Mick Beer"
+  authorUrl = "https://mickbeer.com"
+  linkedin = "https://www.linkedin.com/in/mick-beer/"
+  donate = "https://www.buymeacoffee.com/mickbeer"

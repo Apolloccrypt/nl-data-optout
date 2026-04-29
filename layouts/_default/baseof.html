@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="{{ .Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  {{ range .Translations }}
+  <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
+  {{ end }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <!-- Apply theme before render to prevent flash -->
+  <script src="{{ "js/theme.js" | relURL }}"></script>
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --cream:      #f5f0eb;
+      --cream-dark: #ede8e2;
+      --ink:        #1a1a1a;
+      --ink-muted:  #5a5550;
+      --amber:      #c99a2e;
+      --amber-dark: #a87e22;
+      --border:     #ddd8d2;
+      --card-bg:    #faf8f5;
+    }
+    [data-bs-theme="dark"] {
+      --cream:      #1c1916;
+      --cream-dark: #252220;
+      --ink:        #e8e3dc;
+      --ink-muted:  #9a9590;
+      --border:     #333028;
+      --card-bg:    #211f1c;
+    }
+
+    /* ── Base ── */
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--ink);
+    }
+    a { color: var(--amber-dark); transition: color 0.15s; }
+    a:hover { color: var(--amber); }
+
+    /* ── Navbar ── */
+    .site-nav {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 0.875rem 0;
+    }
+    .site-nav .brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      transition: opacity 0.15s;
+    }
+    .site-nav .brand:hover { opacity: 0.75; }
+    .site-nav .brand em {
+      font-style: italic;
+      color: var(--amber);
+    }
+    .lang-link {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .lang-link:hover { color: var(--ink); }
+    .lang-link.active { color: var(--ink); font-weight: 600; }
+    .theme-btn {
+      background: none;
+      border: none;
+      color: var(--ink-muted);
+      font-size: 1rem;
+      padding: 0;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.15s;
+    }
+    .theme-btn:hover { color: var(--ink); }
+
+    /* ── Section labels ── */
+    .section-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.875rem;
+      display: block;
+    }
+
+    /* ── Forms ── */
+    .form-control, .form-select {
+      background: var(--card-bg);
+      border-color: var(--border);
+      color: var(--ink);
+      font-size: 0.875rem;
+    }
+    .form-control:focus, .form-select:focus {
+      background: var(--card-bg);
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(201,154,46,.15);
+      color: var(--ink);
+    }
+    .form-label { color: var(--ink); font-size: 0.875rem; }
+    .form-text { color: var(--ink-muted); }
+
+    /* ── Buttons ── */
+    .btn-primary-custom {
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-primary-custom:hover { background: #333; color: var(--cream); }
+    .btn-outline-custom {
+      background: transparent;
+      color: var(--ink-muted);
+      border: 1px solid var(--border);
+      padding: 0.375rem 0.875rem;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-outline-custom:hover { border-color: var(--ink-muted); color: var(--ink); }
+
+    /* ── Cards ── */
+    .result-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      padding: 1.5rem;
+    }
+    .rights-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+      background: var(--card-bg);
+    }
+    .rights-card .art-number {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    /* ── Broker badge ── */
+    .broker-badge {
+      display: inline-block;
+      background: var(--cream-dark);
+      color: var(--ink-muted);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.3rem 0.875rem;
+      font-size: 0.8125rem;
+    }
+
+    /* ── Update banner ── */
+    .update-banner {
+      background: var(--cream-dark);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--amber);
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      color: var(--ink-muted);
+    }
+
+    /* ── Disclaimer aside ── */
+    .disclaimer-aside {
+      border-left: 2px solid var(--border);
+      padding-left: 0.875rem;
+      color: var(--ink-muted);
+      font-size: 0.875rem;
+      max-width: 620px;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      margin-top: 4rem;
+      background: var(--cream-dark);
+    }
+    .site-footer a { color: var(--ink-muted); text-decoration: none; transition: color 0.15s; }
+    .site-footer a:hover { color: var(--ink); }
+    .footer-icon { font-size: 1.25rem; line-height: 1; }
+    .footer-icon:hover { color: var(--amber) !important; }
+    .footer-donate {
+      display: inline-block;
+      background: #e8b84b;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 4px;
+      padding: 0.35rem 0.875rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .footer-donate:hover { background: #d4a038; color: #1a1a1a; }
+    [data-bs-theme="dark"] .footer-donate {
+      background: transparent;
+      color: #fcd34d;
+      border: 1.5px solid #fcd34d;
+    }
+    [data-bs-theme="dark"] .footer-donate:hover {
+      background: #fcd34d;
+      color: #1a1a1a;
+    }
+
+    pre { font-size: 0.8125rem; line-height: 1.6; }
+    .border-top { border-color: var(--border) !important; }
+
+    /* ── Dark mode overrides for Bootstrap ── */
+    [data-bs-theme="dark"] .form-control,
+    [data-bs-theme="dark"] .form-select {
+      background-color: var(--card-bg);
+      color: var(--ink);
+      border-color: var(--border);
+    }
+    [data-bs-theme="dark"] option { background: #252220; }
+  </style>
+  {{ block "head" . }}{{ end }}
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a class="brand" href="{{ .Site.Home.RelPermalink }}">
+        NL Data <em>Opt-Out</em>
+      </a>
+
+      <div class="d-flex align-items-center gap-3">
+        <!-- Language switcher -->
+        <div class="d-flex align-items-center gap-2">
+          {{ range $i, $s := hugo.Sites }}
+          <a href="{{ $s.Home.RelPermalink }}"
+             class="lang-link{{ if eq $s.Language.Lang $.Lang }} active{{ end }}">
+            {{ $s.Language.LanguageName }}
+          </a>
+          {{ if lt $i (sub (len hugo.Sites) 1) }}<span style="color:var(--border);font-size:.75rem;">|</span>{{ end }}
+          {{ end }}
+        </div>
+
+        <!-- Theme toggle -->
+        <button id="theme-toggle" class="theme-btn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle dark mode">
+          <i class="bi bi-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4 mb-4" style="font-size:0.875rem;">
+        <div class="col-sm-4">
+          <div class="brand mb-2" style="font-family:'Playfair Display',serif; font-weight:700; font-size:1rem;">
+            NL Data <em style="font-style:italic; color:var(--amber);">Opt-Out</em>
+          </div>
+          <p style="color:var(--ink-muted); font-size:0.8125rem; margin-bottom:0.5rem;">
+            {{ if eq .Lang "nl" }}Open source GDPR-tool. Alles lokaal, geen tracking.{{ else }}Open source GDPR tool. Everything local, no tracking.{{ end }}
+          </p>
+          <a href="{{ site.Params.donate }}" class="footer-donate" target="_blank" rel="noopener noreferrer">
+            ☕ {{ if eq .Lang "nl" }}Steun het project{{ else }}Buy me a coffee{{ end }}
+          </a>
+        </div>
+        <div class="col-sm-4">
+          <p style="font-size:0.6875rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:0.5rem;">
+            {{ if eq .Lang "nl" }}Links{{ else }}Links{{ end }}
+          </p>
+          <ul style="list-style:none; padding:0; margin:0; color:var(--ink-muted); font-size:0.8125rem;">
+            <li><a href="{{ site.Params.github }}/blob/main/CHANGELOG.md">Changelog</a></li>
+            <li><a href="{{ site.Params.github }}/issues/new" target="_blank" rel="noopener noreferrer">{{ if eq .Lang "nl" }}Meld een bug of suggestie{{ else }}Report bug or suggestion{{ end }}</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <p style="font-size:0.6875rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:0.5rem;">
+            {{ if eq .Lang "nl" }}Meer informatie{{ else }}More info{{ end }}
+          </p>
+          <ul style="list-style:none; padding:0; margin:0; color:var(--ink-muted); font-size:0.8125rem;">
+            <li><a href="https://autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener noreferrer">Autoriteit Persoonsgegevens</a></li>
+            <li><a href="https://medium.com/@mick.ronan.beer" target="_blank" rel="noopener noreferrer">{{ if eq .Lang "nl" }}Onderzoek (Medium){{ else }}Research (Medium){{ end }}</a></li>
+            <li><a href="https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX%3A32016R0679" target="_blank" rel="noopener noreferrer">AVG / GDPR Verordening</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border); padding-top:1.25rem;">
+        <!-- Icon row -->
+        <div class="d-flex justify-content-center gap-4 mb-3">
+          <a href="{{ site.Params.github }}" target="_blank" rel="noopener noreferrer"
+             aria-label="GitHub" class="footer-icon">
+            <i class="bi bi-github"></i>
+          </a>
+          <a href="{{ site.Params.linkedin }}" target="_blank" rel="noopener noreferrer"
+             aria-label="LinkedIn" class="footer-icon">
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </div>
+        <!-- Meta row -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2" style="font-size:0.8rem; color:var(--ink-muted);">
+        <span>
+          {{ if eq .Lang "nl" }}Gemaakt door{{ else }}Made by{{ end }}
+          <a href="{{ site.Params.authorUrl }}" target="_blank" rel="noopener noreferrer">{{ site.Params.author }}</a>
+          &middot; <a href="https://github.com/Apolloccrypt/nl-data-optout/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>
+        </span>
+        <span>
+          <a href="{{ site.Params.github }}/blob/main/CHANGELOG.md" style="color:inherit; text-decoration:none;">v{{ site.Params.version }} &middot; {{ now | time.Format "2 Jan 2006" }}</a>
+        </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  {{ block "scripts" . }}{{ end }}
+</body>
+</html>
