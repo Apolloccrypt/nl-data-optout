@@ -1,4 +1,5 @@
 name: Deploy Hugo to GitHub Pages
+  # re-register workflow
 
 on:
   push:
